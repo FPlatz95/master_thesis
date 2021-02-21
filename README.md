@@ -11,7 +11,7 @@ Finally
 
 ## Folder Structure
 Description of the folder structure. 
-### WWTP_Samples  
+### WWTP_Sequences  
 The pipeline was established by testing a wide varierity of tools on WWTP samples. These were then evaluated, and some were discarded. 
 This folder contains the code used for this analysis 
 
