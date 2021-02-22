@@ -1,22 +1,8 @@
-#rm(list=ls()) # Clear workspace
-#graphics.off() # Clear plots
-#cat("\014") # Clear console
-
 filename=commandArgs(trailingOnly = F)
 print(filename[6])
 
 library(dplyr)
 library(ggplot2)
-
-# graftm_dir="/srv/MA/Projects/microflora_danica/analysis/projects/MFD_seges/results/WWTP_sequences/graftM/"
-# 
-# graftm_aale_dir=paste0(graftm_dir,"AalE_graftM_SILVA_classification/")
-# graftm_bjer_dir=paste0(graftm_dir,"Bjer_graftM_SILVA_classification/")
-# graftm_kalu_dir=paste0(graftm_dir,"Kalu_graftM_SILVA_classification/")
-# 
-# aale_graftm=read.delim(paste0(graftm_aale_dir,"combined_count_table.txt"),header=T)
-# bjer_graftm=read.delim(paste0(graftm_bjer_dir,"combined_count_table.txt"),header=T)
-# kalu_graftm=read.delim(paste0(graftm_kalu_dir,"combined_count_table.txt"),header=T)
 
 graftm_inserttax=function(input,taxsplit){
   input%>%
