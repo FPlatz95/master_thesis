@@ -1,10 +1,7 @@
 library(dplyr)
 library(stringr)
 
-
-
 ######## FUNCTIONS ############
-
 
 insert_tax=function(input,taxsplit){
   input%>%
@@ -25,8 +22,19 @@ kaijutootutable = function(input){
     mutate(suffix = "_kaiju") %>%
     mutate(OTU = paste0("OTU_", taxon_id, suffix)) %>%
     select(OTU,reads,Kingdom,Phylum,Class,Order,Family,Genus,Species) %>%
-    filter(OTU != paste0("OTU_", "aale_","NA"))
+    filter(OTU != paste0("OTU_", "NA_","kaiju"))
 }
 
+filepath_load=commandArgs(trailingOnly = F)
+filepath = filepath_load[6]
+filename_split = as.vector(strsplit(filepath, "/"))
+filename_split = unlist(filename_split)
+filename_grep = grep("summary.tsv", filename_split, value = TRUE)
+filename = gsub('_.*', "", filename_grep)
 
-write.csv(otu_kaiju,"/srv/MA/Projects/microflora_danica/analysis/projects/MFD_seges/results/WWTP_sequences/kaiju/output_nr/kaiju_coreKaiju_variableDB_ampvis.csv", row.names = FALSE)
+file = read.delim(filepath, header = T)
+
+ampvis_otu = kaijutootutable(file)
+ampvis_otu = ampvis_otu %>% rename(!!filename := reads)
+
+write.csv(ampvis_otu, paste0("/srv/MA/Projects/microflora_danica/analysis/projects/MFD_seges/results/kaiju_mfd_test/kaiju2ampvis/",filename,"_ampvisotu.csv"), row.names = FALSE)
