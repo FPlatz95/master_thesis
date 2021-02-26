@@ -37,4 +37,4 @@ file = read.delim(filepath, header = T)
 ampvis_otu = kaijutootutable(file)
 ampvis_otu = ampvis_otu %>% rename(!!filename := reads)
 
-write.csv(ampvis_otu, paste0("/srv/MA/Projects/microflora_danica/analysis/projects/MFD_seges/results/kaiju_mfd_test/kaiju2ampvis/",filename,"_ampvisotu.csv"), row.names = FALSE)
+write.csv(ampvis_otu, paste0("/srv/MA/Projects/microflora_danica/analysis/classified_kaiju/kaiju2table/ampvis_otu/",filename,"_ampvisotu.csv"), row.names = FALSE)
