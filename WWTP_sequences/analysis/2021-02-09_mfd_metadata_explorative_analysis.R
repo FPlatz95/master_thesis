@@ -8,12 +8,13 @@ library(dplyr)
 library(ampvis2)
 library(readxl)
 library(tidyr)
+library(stringr)
 
 #########
 
 mfd_metadata = read.csv("/srv/MA/Projects/microflora_danica/analysis/mfd_metadata/2020-11-10-14-47_mdf_metadata.csv") 
 graftm_otu = read.csv("/srv/MA/Projects/microflora_danica/analysis/classified_graftm/graftm_output/otutables/ampvis_format/graftm_combined_otu.csv", check.names = FALSE)
-
+kaiju_otu = read.csv("/srv/MA/Projects/microflora_danica/analysis/classified_kaiju/kaiju2table/ampvis_otu/kaiju_combined_otu.csv", check.names = FALSE)
 
 #### Meta Data analysis #### 
 # What sample types are present in the data
@@ -130,6 +131,7 @@ mfd_metadata$total_reads_bins = cut(mfd_metadata$total_reads, total_reads_breaks
 
 ### Loading ampvis object ###
 
+# GraftM
 graftm_ampvis = amp_load(metadata = mfd_metadata_filtered, otutable = graftm_otu)
 graftm_ampvis_stats = amp_alphadiv(graftm_ampvis)
 
@@ -162,5 +164,17 @@ graftm_ampvis_soil = amp_subset_samples(graftm_ampvis, habitattype_new %in% c("a
 
 amp_ordinate(graftm_ampvis_soil, sample_color_by = "habitattype_new", sample_colorframe = TRUE, type = "PCA")
 
+mean(graftm_ampvis_stats$ObservedOTUs)
+
+#Kaiju 
+kaiju_ampvis = amp_load(metadata = mfd_metadata_filtered, otutable = kaiju_otu)
+
+amp_ordinate(kaiju_ampvis, sample_color_by = "habitattype_new", sample_colorframe = TRUE)
+
+amp_ordinate(kaiju_ampvis, sample_color_by = "type", sample_colorframe = TRUE) 
+
+kaiju_ampvis_soil = amp_subset_samples(kaiju_ampvis, habitattype_new %in% c("agriculture", "urban", "River Valleys", "bog", "dune", "meadow", "grasslands", "forest", "moor"))
+
+amp_ordinate(kaiju_ampvis_soil, sample_color_by = "habitattype_new", sample_colorframe = TRUE, type = "PCA")
 
 

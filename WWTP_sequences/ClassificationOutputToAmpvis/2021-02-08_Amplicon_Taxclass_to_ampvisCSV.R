@@ -54,7 +54,7 @@ amp_otu=amp_otu%>%
 write.csv(amp_otu,"/srv/MA/Projects/microflora_danica/analysis/projects/MFD_seges/results/WWTP_sequences/amplicon/amplicon_ampvis.csv",row.names=F)
 
 
-### Test for CSV file to ampvis ### 
+### Test for CSV file to ampvis ###
 
 rm(list=ls()) # Clear workspace
 graphics.off() # Clear plots

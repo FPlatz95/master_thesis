@@ -15,4 +15,4 @@ threads=10
 ls $data_path | grep _R1.fastq | sed 's/.fastq.gz//' > $samples_path/wwtp_sequences.txt
 
 # run parallel
-cat $samples_path/wwtp_sequences.txt | parallel -j3 graftM graft --forward $data_path/{} --graftm_package $graftm_package --output_directory $output_dir/{}_SILVA --threads $threads '&>' $output_dir/log/{}_graftm_SILVA.log
+cat $samples_path/wwtp_sequences.txt | parallel -j5 graftM graft --forward $data_path/{} --graftm_package $graftm_package --output_directory $output_dir/{}_SILVA --threads $threads '&>' $output_dir/log/{}_graftm_SILVA.log
