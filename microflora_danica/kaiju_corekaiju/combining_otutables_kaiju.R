@@ -1,7 +1,7 @@
 filename=commandArgs(trailingOnly = F)
 
 library(dplyr)
-library(ggplot2)
+
 
 
 kaiju_combineotu=function(total,input){

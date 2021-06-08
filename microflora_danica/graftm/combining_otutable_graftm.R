@@ -3,6 +3,7 @@ print(filename[6])
 
 library(dplyr)
 library(ggplot2)
+library(readr)
 
 graftm_combineotu=function(total,input){
   data=total%>%
@@ -24,9 +25,9 @@ graftm_combineotu=function(total,input){
       filter(Kingdom!=" Eukaryota")
   }
 }
-total_otu_table=read.csv("graftm_combined_otu.csv",header=T,stringsAsFactors = F)
+total_otu_table=read_csv("graftm_combined_otu.csv",header=T,stringsAsFactors = F)
 #print(total_otu_table)
-file2=read.csv(filename[6],header=T,stringsAsFactors = F)
+file2=read_csv(filename[6],header=T,stringsAsFactors = F)
 #print(file2)
 otu=graftm_combineotu(total_otu_table,file2)
 #print(otu)

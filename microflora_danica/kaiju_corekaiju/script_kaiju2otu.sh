@@ -1,4 +1,3 @@
-
 for i in /srv/MA/Projects/microflora_danica/analysis/classified_kaiju/kaiju2table/*_summary.tsv
 do
   FILE=$(echo ${i})
