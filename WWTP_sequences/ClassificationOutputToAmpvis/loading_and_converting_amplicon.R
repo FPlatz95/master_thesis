@@ -51,10 +51,11 @@ create_paste = function(input) {
   return(input)
 }
 
+mfd_metadata = read.csv("/srv/MA/Projects/microflora_danica/analysis/mfd_metadata/2020-11-10-14-47_mdf_metadata.csv")
 
 amplicon_metadata = read_excel("/srv/MA/Projects/microflora_danica/analysis/projects/MFD_seges/results/WWTP_sequences/amplicon/MiDAS_metadata_2006-2018_updated_2019-09-27.xlsx")
 amplicon_metadata_filtered = amplicon_metadata %>% filter(Year == 2016, Period == "Summer", !Plant %in% c("Boeslum","Mariagerfjord", "Odense NE", "Odense NW", "Randers", "Ribe", "Skive", "Viborg")) 
-amplicon_otu = amp_import_usearch("/srv/MA/Projects/microflora_danica/analysis/projects/MFD_seges/results/WWTP_sequences/amplicon/ASVtable.tsv", "/srv/MA/Projects/microflora_danica/analysis/projects/MFD_seges/results/WWTP_sequences/amplicon/ASVs.R1.midas35.sintax")
+amplicon_otu = amp_import_usearch("/srv/MA/Projects/microflora_danica/analysis/projects/MFD_seges/results/WWTP_sequences/amplicon/ASVtable.tsv", "/srv/MA/Projects/microflora_danica/analysis/projects/MFD_seges/results/WWTP_sequences/amplicon/ASVs.R1.midas37.sintax")
 
 
 amplicon_otu_aale = amplicon_otu[,c("OTU", "MQ180319-64","Kingdom","Phylum","Class","Order","Family","Genus","Species")] %>% rename(Aale_Amplicon_Midas = 'MQ180319-64') %>% filter(Aale_Amplicon_Midas > 0)

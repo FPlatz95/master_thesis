@@ -1,0 +1,65 @@
+# Methods
+
+```{r}
+library(bookdown)
+library(dplyr)
+library(readxl)
+library(ampvis2)
+library(knitr)
+```
+
+```{r}
+metadata = read_excel("/srv/MA/Projects/microflora_danica/analysis/projects/MFD_seges/data/WWTP_sequences/2021-02-09_WWTP_metadata.xlsx")
+kaiju_refseq = read.csv("/srv/MA/Projects/microflora_danica/analysis/projects/MFD_seges/results/WWTP_sequences/kaiju/kaiju_refseq/ampvis_otu/kaiju_refseq_ampvis_combined.csv")
+kaiju_nr = read.csv("/srv/MA/Projects/microflora_danica/analysis/projects/MFD_seges/results/WWTP_sequences/kaiju/kaiju_nr/ampvis_otu/kaiju_nr_ampvis_combined.csv")
+corekaiju_refseq = read.csv("/srv/MA/Projects/microflora_danica/analysis/projects/MFD_seges/results/WWTP_sequences/kaiju/corekaiju/refseq_ampvis_otu/corekaiju_refseq_ampvis_combined.csv")
+corekaiju_nr = read.csv("/srv/MA/Projects/microflora_danica/analysis/projects/MFD_seges/results/WWTP_sequences/kaiju/corekaiju/nr_t20_ampvis_otu/corekaiju_nr_ampvis_combined.csv")
+
+## Joining tables 
+data_kaiju_full_join = kaiju_refseq %>% 
+  full_join(kaiju_nr, by = c("OTU", "Kingdom","Phylum","Class","Order","Family","Genus","Species")) %>% 
+  full_join(corekaiju_refseq, by = c("OTU", "Kingdom","Phylum","Class","Order","Family","Genus","Species")) %>% 
+  full_join(corekaiju_nr, by = c("OTU", "Kingdom","Phylum","Class","Order","Family","Genus","Species"))
+data_kaiju_full_join = data_kaiju_full_join[,c(1:16,24:68,17:23)]
+
+## Ampvis objects
+kaiju_fj_ampvis = amp_load(otutable = data_kaiju_full_join, metadata = metadata)
+stats_kaiju_fj = amp_alphadiv(kaiju_fj_ampvis)
+
+corekaiju_ampvis = amp_subset_samples(kaiju_fj_ampvis, Classifier == "CoreKaiju")
+stats_corekaiju = amp_alphadiv(corekaiju_ampvis)
+
+kaiju_ampvis = amp_subset_samples(kaiju_fj_ampvis, Classifier == "Kaiju")
+stats_kaiju = amp_alphadiv(kaiju_ampvis)
+
+```
+
+```{r}
+stats_corekaiju %>% 
+  mutate(normalized_reads = Reads / Metagenome_size_at) %>% 
+  ggplot(aes(x = Database, y = normalized_reads)) + 
+    geom_boxplot() + 
+    theme_classic() + 
+    theme(panel.grid.major = element_line(color = "grey90"),
+          panel.grid.minor = element_line(color = "grey90")) + 
+    ylab("Classified Reads") + 
+    ylim(c(0,1))+ 
+    labs(title = "Core Kaiju")
+
+stats_kaiju %>% 
+  mutate(normalized_reads = Reads / Metagenome_size_at) %>% 
+  ggplot(aes(x = Database, y = normalized_reads)) + 
+    geom_boxplot() + 
+    theme_classic() + 
+    theme(panel.grid.major = element_line(color = "grey90"),
+          panel.grid.minor = element_line(color = "grey90")) + 
+    ylab("Classified Reads") + 
+    ylim(c(0,1)) + 
+    labs(title = "Kaiju")
+
+```
+
+```{r}
+amp_heatmap(kaiju_fj_ampvis, group_by = c("Database", "Classifier"), tax_empty = "remove", tax_aggregate = "Family", tax_show = 20)
+```
+

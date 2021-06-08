@@ -1,4 +1,4 @@
-for i in /srv/MA/Projects/microflora_danica/analysis/projects/MFD_seges/results/WWTP_sequences/kraken2/bac_refseq_WWTP/*_kraken2.report
+for i in /srv/MA/Projects/microflora_danica/analysis/projects/MFD_seges/results/WWTP_sequences/kraken2/bac_refseq/*_kraken2.report
 do
   FILE=$(echo ${i})
   echo $FILE

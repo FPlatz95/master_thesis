@@ -1,0 +1,438 @@
+--- 
+title: "GraftM Analysis"
+author: "FPlatz16"
+date: "`r Sys.Date()`"
+bibliography:
+- book.bib
+- packages.bib
+description: This is a minimal example of using the bookdown package to write a book.
+  The output format for this example is bookdown::gitbook.
+documentclass: book
+link-citations: yes
+site: bookdown::bookdown_site
+biblio-style: apalike
+---
+
+# GraftM Analysis 
+
+
+```{r include =FALSE}
+library(bookdown)
+library(dplyr)
+library(readxl)
+library(ampvis2)
+library(knitr)
+```
+
+```{r include=FALSE}
+# automatically create a bib database for R packages
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown'
+), 'packages.bib')
+```
+
+GraftM was used to make taxonomic classification of 14 metagenomes from danish WWTP. A custom GraftM package was created, using the MIDAS 3.7 database to search for 16S rRNA genes. GraftM classifies reads using an hmm search, and subsequently assigns taxonomy by placing the reads into a prebuild phylogenetic tree. The metagenomes used in this study are described in Table \@ref(tab:metagenome-information) 
+
+```{r metagenome-information}
+metadata = read_excel("/srv/MA/Projects/microflora_danica/analysis/projects/MFD_seges/data/WWTP_sequences/2021-02-09_WWTP_metadata.xlsx")
+metadata_filtered = metadata %>% filter(Classifier == "GraftM", Database == "MIDAS") 
+
+print(metadata_filtered[,c(-1,-2,-3)])
+```
+
+```{r include = FALSE}
+GraftM_Midas = read.csv("/srv/MA/Projects/microflora_danica/analysis/projects/MFD_seges/results/WWTP_sequences/graftM/01_midas_combined_count/ampvis_otu/graftm_midas_combined_otu.csv")
+GraftM_Silva = read.csv("/srv/MA/Projects/microflora_danica/analysis/projects/MFD_seges/results/WWTP_sequences/graftM/02_silva_combined_count/ampvis_otu/graftm_silva_combined_otu.csv")
+SingleM = read.csv("/srv/MA/Projects/microflora_danica/analysis/projects/MFD_seges/results/WWTP_sequences/singleM/ampvis_otu/singlem_combined_otu.csv")
+Amplicon = read.csv("/srv/MA/Projects/microflora_danica/analysis/projects/MFD_seges/results/WWTP_sequences/amplicon/ampvis_otu/amplicon_combined_otu.csv")
+metadata = read_excel("/srv/MA/Projects/microflora_danica/analysis/projects/MFD_seges/data/WWTP_sequences/2021-02-09_WWTP_metadata.xlsx")
+
+## Joining tables 
+data = Amplicon %>% 
+  full_join(GraftM_Midas, by = c("OTU", "Kingdom","Phylum","Class","Order","Family","Genus","Species")) %>% 
+  full_join(GraftM_Silva, by = c("OTU", "Kingdom","Phylum","Class","Order","Family","Genus","Species")) %>% 
+  full_join(SingleM, by = c("OTU", "Kingdom","Phylum","Class","Order","Family","Genus","Species"))
+data = data[,c(1:15,23:67,16:22)]
+
+## Creating ampvis object
+data_ampvis_prelim = amp_load(otutable = data, metadata = metadata) 
+data_ampvis = amp_subset_samples(data_ampvis_prelim, Database == "MIDAS")
+data_ampvis_rarefied = amp_subset_samples(data_ampvis, rarefy = 5801)
+graftm_comp_ampvis = amp_subset_samples(data_ampvis_prelim, Classifier == "GraftM")
+graftm_comp_ampvis_rarefied = amp_subset_samples(graftm_comp_ampvis, rarefy = 5801) 
+graftm_silva_rarefied = amp_subset_samples(graftm_comp_ampvis_rarefied, Database == "Silva")
+amplicon_ampvis = amp_subset_samples(data_ampvis, Classifier == "Amplicon")
+graftm_ampvis = amp_subset_samples(data_ampvis, Classifier == "GraftM")
+graftm_ampvis_rarefied = amp_subset_samples(graftm_ampvis, rarefy = 5801) 
+stats_graftm = amp_alphadiv(graftm_ampvis_rarefied) 
+stats_graftm_nonrarefied = amp_alphadiv(graftm_ampvis)
+amplicon_ampvis_rarefied = amp_subset_samples(amplicon_ampvis, rarefy = 5801) 
+
+```
+
+GraftM extracts reads and assigns these a taxonomic classification. To evaluate this,a comparison between reads extracted and reads classified were made: 
+
+```{r}
+stats_graftm_nonrarefied = stats_graftm_nonrarefied %>% arrange(Plant)
+wwtp_plants = stats_graftm$Plant
+reads_classified = stats_graftm_nonrarefied$Reads 
+reads_extracted = c(8712,7886 ,6123 ,7217 ,8269 ,8107 ,6841 ,7212 ,7223 ,8312 ,7679 ,7571 ,6582 ,8050)
+metagenome_size = c(17056633, 16547260, 14846304, 15870938, 19764160, 16805544, 15488718, 16159208, 17137236, 19515615, 15127001, 17891614, 15305860, 20471072)
+
+graftm_reads_comp = data.frame(reads_extracted, reads_classified, metagenome_size)
+graftm_reads_comp = graftm_reads_comp %>% mutate(rRNA_per_genome = reads_extracted / (metagenome_size / (3500000/1550)))
+graftm_reads_comp = graftm_reads_comp %>% mutate(reads_unclassified = reads_extracted - reads_classified) 
+graftm_reads_comp = graftm_reads_comp[,c(1,2,5,3,4)]
+graftm_reads_comp$rRNA_per_genome = round(graftm_reads_comp$rRNA_per_genome, 2)
+colnames(graftm_reads_comp) = c("Extracted Reads", "Classified Reads","Unclassified Reads" ,"Metagenome Size (Reads)", "Theoretical 16S rRNA per genome")
+rownames(graftm_reads_comp) = stats_graftm$Plant 
+
+print(graftm_reads_comp) 
+
+graftm_reads_comp_summary = data.frame(c(mean(graftm_reads_comp$`Extracted Reads`), mean(graftm_reads_comp$`Classified Reads`), mean(graftm_reads_comp$`Unclassified Reads`), mean(graftm_reads_comp$`Metagenome Size`), mean(graftm_reads_comp$`Theoretical 16S rRNA per genome`)),c(sd(graftm_reads_comp$`Extracted Reads`), sd(graftm_reads_comp$`Classified Reads`), sd(graftm_reads_comp$`Unclassified Reads`), sd(graftm_reads_comp$`Metagenome Size`), sd(graftm_reads_comp$`Theoretical 16S rRNA per genome`)))
+print(graftm_reads_comp_summary)
+
+ggplot(graftm_reads_comp, aes(x =reads_extracted, y = metagenome_size)) + 
+  geom_point()
+```
+
+While the average bacterial genomes contains 4.2 rRNA genes, it seems that GraftM might not extract all 16S rRNA genes from the metagenomes. This hypothesis sits under the assumption that all reads in the metagenome are equally distributed throughout the bacterial genome. 
+
+We rarefied the samples to 5801 (The samples with the lowest ammount of reads) to investigate how the taxonomic classification was distributed over different taxonomic ranks: 
+
+```{r}
+amp_rarecurve(graftm_ampvis, color_by = "Plant", stepsize = 200) + 
+  geom_vline(xintercept=5800, color = "darkred", lty = 2) + 
+  xlim(0,10000) + 
+  ylim(0,2000) + 
+  labs(title = "GraftM")
+
+amp_rarecurve(data_ampvis_rarefied, color_by = "Classifier", stepsize = 200) + 
+  xlim(0,10000) + 
+  ylim(0,2000) + 
+  labs(title = "GraftM and Amplicon Rarefied")
+```
+
+```{r}
+amp_export_otutable(graftm_ampvis_rarefied, "/srv/MA/Projects/microflora_danica/analysis/projects/MFD_seges/results/WWTP_sequences/graftM/01_midas_combined_count/ampvis_otu/graftm_midas_otu_rarefied")
+graftm_otu_rarefied = read.csv("/srv/MA/Projects/microflora_danica/analysis/projects/MFD_seges/results/WWTP_sequences/graftM/01_midas_combined_count/ampvis_otu/graftm_midas_otu_rarefied.csv", sep = "\t")
+
+graftm_phylums = graftm_otu_rarefied %>% 
+  group_by(Phylum) %>% 
+  count() %>% 
+  arrange(desc(n))
+
+graftm_class = graftm_otu_rarefied %>% 
+  group_by(Class) %>% 
+  count() %>% 
+  arrange(desc(n))
+
+graftm_order = graftm_otu_rarefied %>% 
+  group_by(Order) %>% 
+  count() %>% 
+  arrange(desc(n))
+
+graftm_family = graftm_otu_rarefied %>% 
+  group_by(Family) %>% 
+  count() %>% 
+  arrange(desc(n))
+
+graftm_genus = graftm_otu_rarefied %>% 
+  group_by(Genus) %>% 
+  count() %>% 
+  arrange(desc(n))
+
+graftm_species = graftm_otu_rarefied %>% 
+  group_by(Species) %>% 
+  count() %>% 
+  arrange(desc(n))
+
+graftm_nrow = c(length(graftm_phylums$n)-1, length(graftm_class$n)-1, length(graftm_order$n)-1, length(graftm_family$n)-1, length(graftm_genus$n)-1, length(graftm_species$n)-1)
+
+
+taxonomic_levels = c("Phylum","Class","Order","Family","Genus","Species")
+
+graftm_nrow_df = data.frame(taxonomic_levels, graftm_nrow)
+graftm_nrow_df$taxonomic_levels = factor(graftm_nrow_df$taxonomic_levels, ordered = TRUE, levels = c("Phylum","Class","Order","Family","Genus","Species")) 
+  
+graftm_nrow_df_new = t(graftm_nrow_df)
+graftm_nrow_df_new = as.data.frame(graftm_nrow_df_new)
+colnames(graftm_nrow_df_new) = taxonomic_levels
+graftm_nrow_df_new = graftm_nrow_df_new[-1,]
+print(graftm_nrow_df_new)
+```
+
+## Amplicon compared to GraftM 
+Rarefraction of amplicon samples: 
+
+```{r}
+amp_rarecurve(amplicon_ampvis, color_by = "Plant") + 
+  geom_vline(xintercept=5800, color = "darkred", lty = 2) + 
+  xlim(0,100000) + 
+  ylim(0,2500) + 
+  labs(title = "Amplicon")
+
+amp_rarecurve(amplicon_ampvis_rarefied, color_by = "Plant", stepsize = 200) + 
+  xlim(0,10000) + 
+  ylim(0,1200) + 
+  labs(title = "Amplicon")
+```
+
+```{r}
+amp_export_otutable(amplicon_ampvis_rarefied, "/srv/MA/Projects/microflora_danica/analysis/projects/MFD_seges/results/WWTP_sequences/amplicon/ampvis_otu/amplicon_midas_otu_rarefied")
+amplicon_otu_rarefied = read.csv("/srv/MA/Projects/microflora_danica/analysis/projects/MFD_seges/results/WWTP_sequences/amplicon/ampvis_otu/amplicon_midas_otu_rarefied.csv", sep = "\t")
+
+amplicon_phylums = amplicon_otu_rarefied %>% 
+  group_by(Phylum) %>% 
+  count() %>% 
+  arrange(desc(n))
+
+amplicon_class = amplicon_otu_rarefied %>% 
+  group_by(Class) %>% 
+  count() %>% 
+  arrange(desc(n))
+
+amplicon_order = amplicon_otu_rarefied %>% 
+  group_by(Order) %>% 
+  count() %>% 
+  arrange(desc(n))
+
+amplicon_family = amplicon_otu_rarefied %>% 
+  group_by(Family) %>% 
+  count() %>% 
+  arrange(desc(n))
+
+amplicon_genus = amplicon_otu_rarefied %>% 
+  group_by(Genus) %>% 
+  count() %>% 
+  arrange(desc(n))
+
+amplicon_species = amplicon_otu_rarefied %>% 
+  group_by(Species) %>% 
+  count() %>% 
+  arrange(desc(n))
+
+amplicon_nrow = c(length(amplicon_phylums$n)-1, length(amplicon_class$n)-1, length(amplicon_order$n)-1, length(amplicon_family$n)-1, length(amplicon_genus$n)-1, length(amplicon_species$n)-1)
+
+amplicon_nrow_df = data.frame(taxonomic_levels, amplicon_nrow)
+amplicon_nrow_df$taxonomic_levels = factor(amplicon_nrow_df$taxonomic_levels, ordered = TRUE, levels = c("Phylum","Class","Order","Family","Genus","Species")) 
+
+amplicon_nrow_df_new = t(amplicon_nrow_df)
+amplicon_nrow_df_new = as.data.frame(amplicon_nrow_df_new)
+colnames(amplicon_nrow_df_new) = taxonomic_levels
+amplicon_nrow_df_new = amplicon_nrow_df_new[-1,]
+
+comparison_nrow = amplicon_nrow_df_new %>% full_join(graftm_nrow_df_new) 
+rownames(comparison_nrow) = c("Amplicon", "GraftM")
+
+print(comparison_nrow)
+```
+
+We also investigated the normalized total number of reads at each taxonomic classification. 
+
+```{r}
+graftm_otu_rarefied_sum = graftm_otu_rarefied %>% mutate(summed_reads = AalE_GraftM_Midas + AalW_GraftM_Midas + Aved_GraftM_Midas + Bjer_GraftM_Midas + Damh_GraftM_Midas + Ega_GraftM_Midas + Ejby_GraftM_Midas + EsbE_GraftM_Midas + EsbW_GraftM_Midas + Fred_GraftM_Midas + Hade_GraftM_Midas + Hirt_GraftM_Midas + Hjor_GraftM_Midas + Kalu_GraftM_Midas) 
+
+test_otu_sum = graftm_otu_rarefied %>% mutate(sum = select(., AalE_GraftM_Midas:Kalu_GraftM_Midas) %>% apply(1, sum, na.rm=TRUE))
+
+graftm_phylum_sum = aggregate(graftm_otu_rarefied_sum$summed_reads, by=list(Category=graftm_otu_rarefied_sum$Phylum), FUN=sum)
+graftm_phylum_sum = graftm_phylum_sum[-1,]
+
+graftm_class_sum = aggregate(graftm_otu_rarefied_sum$summed_reads, by=list(Category=graftm_otu_rarefied_sum$Class), FUN=sum)
+graftm_class_sum = graftm_class_sum[-1,]
+
+graftm_order_sum = aggregate(graftm_otu_rarefied_sum$summed_reads, by=list(Category=graftm_otu_rarefied_sum$Order), FUN=sum)
+graftm_order_sum = graftm_order_sum[-1,]
+
+graftm_family_sum = aggregate(graftm_otu_rarefied_sum$summed_reads, by=list(Category=graftm_otu_rarefied_sum$Family), FUN=sum)
+graftm_family_sum = graftm_family_sum[-1,]
+
+graftm_genus_sum = aggregate(graftm_otu_rarefied_sum$summed_reads, by=list(Category=graftm_otu_rarefied_sum$Genus), FUN=sum)
+graftm_genus_sum = graftm_genus_sum[-1,]
+
+graftm_species_sum = aggregate(graftm_otu_rarefied_sum$summed_reads, by=list(Category=graftm_otu_rarefied_sum$Species), FUN=sum)
+graftm_species_sum = graftm_species_sum[-1,]
+
+graftm_normalized = c(sum(graftm_phylum_sum$x)/sum(graftm_otu_rarefied_sum$summed_reads), sum(graftm_class_sum$x)/sum(graftm_otu_rarefied_sum$summed_reads), sum(graftm_order_sum$x)/sum(graftm_otu_rarefied_sum$summed_reads), sum(graftm_family_sum$x)/sum(graftm_otu_rarefied_sum$summed_reads), sum(graftm_genus_sum$x)/sum(graftm_otu_rarefied_sum$summed_reads), sum(graftm_species_sum$x)/sum(graftm_otu_rarefied_sum$summed_reads))
+
+
+amplicon_otu_rarefied_sum = amplicon_otu_rarefied %>% mutate(summed_reads = AalE_Amplicon_Midas + AalW_Amplicon_Midas + Aved_Amplicon_Midas + Bjer_Amplicon_Midas + Damh_Amplicon_Midas + Ega_Amplicon_Midas + Ejby_Amplicon_Midas + EsbE_Amplicon_Midas + EsbW_Amplicon_Midas + Fred_Amplicon_Midas + Hade_Amplicon_Midas + Hirt_Amplicon_Midas + Hjor_Amplicon_Midas + Kalu_Amplicon_Midas)
+
+amplicon_phylum_sum = aggregate(amplicon_otu_rarefied_sum$summed_reads, by=list(Category=amplicon_otu_rarefied_sum$Phylum), FUN=sum)
+amplicon_phylum_sum = amplicon_phylum_sum[-1,]
+
+amplicon_class_sum = aggregate(amplicon_otu_rarefied_sum$summed_reads, by=list(Category=amplicon_otu_rarefied_sum$Class), FUN=sum)
+amplicon_class_sum = amplicon_class_sum[-1,]
+
+amplicon_order_sum = aggregate(amplicon_otu_rarefied_sum$summed_reads, by=list(Category=amplicon_otu_rarefied_sum$Order), FUN=sum)
+amplicon_order_sum = amplicon_order_sum[-1,]
+
+amplicon_family_sum = aggregate(amplicon_otu_rarefied_sum$summed_reads, by=list(Category=amplicon_otu_rarefied_sum$Family), FUN=sum)
+amplicon_family_sum = amplicon_family_sum[-1,]
+
+amplicon_genus_sum = aggregate(amplicon_otu_rarefied_sum$summed_reads, by=list(Category=amplicon_otu_rarefied_sum$Genus), FUN=sum)
+amplicon_genus_sum = amplicon_genus_sum[-1,]
+
+amplicon_species_sum = aggregate(amplicon_otu_rarefied_sum$summed_reads, by=list(Category=amplicon_otu_rarefied_sum$Species), FUN=sum)
+amplicon_species_sum = amplicon_species_sum[-1,]
+
+amplicon_normalized = c(sum(amplicon_phylum_sum$x)/sum(amplicon_otu_rarefied_sum$summed_reads), sum(amplicon_class_sum$x)/sum(amplicon_otu_rarefied_sum$summed_reads), sum(amplicon_order_sum$x)/sum(amplicon_otu_rarefied_sum$summed_reads), sum(amplicon_family_sum$x)/sum(amplicon_otu_rarefied_sum$summed_reads), sum(amplicon_genus_sum$x)/sum(amplicon_otu_rarefied_sum$summed_reads), sum(amplicon_species_sum$x)/sum(amplicon_otu_rarefied_sum$summed_reads))
+
+print(amplicon_normalized)
+
+normalized_readcount = data.frame(round(amplicon_normalized,2), round(graftm_normalized,2))
+normalized_readcount = t(normalized_readcount)
+normalized_readcount = as.data.frame(normalized_readcount)
+rownames(normalized_readcount) = c("Amplicon", "GraftM")
+colnames(normalized_readcount) = taxonomic_levels
+print(normalized_readcount)
+
+```
+
+
+
+
+
+
+```{r}
+amp_heatmap(data_ampvis, group_by = "Classifier", tax_aggregate = "Family", tax_empty = "remove", tax_show = 35, tax_add = "Phylum") + 
+  labs(title = "Taxonomic Level: Family") + 
+  theme(plot.title = element_text(size = 22, hjust = 0.5))
+
+amp_heatmap(data_ampvis, group_by = "Classifier", tax_aggregate = "Class", tax_empty = "remove", tax_show = 35, tax_add = "Phylum") + 
+  labs(title = "Taxonomic Level: Class") + 
+  theme(plot.title = element_text(size = 22, hjust = 0.5))
+
+amp_heatmap(data_ampvis, group_by = "Classifier", tax_aggregate = "Genus", tax_empty = "remove", tax_show = 35, tax_add = "Phylum") + 
+  labs(title = "Taxonomic Level: Genus") + 
+  theme(plot.title = element_text(size = 22, hjust = 0.5))
+
+amp_heatmap(data_ampvis, group_by = "Classifier", tax_aggregate = "Species", tax_empty = "remove", tax_show = 35, tax_add = "Phylum") + 
+  labs(title = "Taxonomic Level: Species") + 
+  theme(plot.title = element_text(size = 22, hjust = 0.5))
+```
+
+
+```{r}
+amp_octave(amplicon_ampvis) 
+
+data_ampvis_amplicon_octave = amp_subset_samples(amplicon_ampvis_rarefied, Plant %in% c("Bjergmarken", "Hirtshals", "Kalundborg"))
+amp_octave(data_ampvis_amplicon_octave) + 
+  labs(title = "Amplicon") + 
+  theme(plot.title = element_text(size = 22))
+
+data_ampvis_graftm_octave = amp_subset_samples(graftm_ampvis_rarefied, Plant %in% c("Bjergmarken", "Hirtshals", "Kalundborg"))
+amp_octave(data_ampvis_graftm_octave) + 
+  labs(title = "GraftM") + 
+  theme(plot.title = element_text(size = 22))
+
+amp_octave(graftm_silva_rarefied)
+
+```
+
+
+
+## GraftM Silva vs Midas
+```{r}
+
+
+amp_export_otutable(graftm_silva_rarefied, "/srv/MA/Projects/microflora_danica/analysis/projects/MFD_seges/results/WWTP_sequences/graftM/02_silva_combined_count/ampvis_otu/graftm_silva_otu_rarefied")
+graftm_otu_silva_rarefied = read.csv("/srv/MA/Projects/microflora_danica/analysis/projects/MFD_seges/results/WWTP_sequences/graftM/02_silva_combined_count/ampvis_otu/graftm_silva_otu_rarefied.csv", sep = "\t")
+
+graftm_silva_phylums = graftm_otu_silva_rarefied %>% 
+  group_by(Phylum) %>% 
+  count() %>% 
+  arrange(desc(n))
+
+graftm_silva_class = graftm_otu_silva_rarefied %>% 
+  group_by(Class) %>% 
+  count() %>% 
+  arrange(desc(n))
+
+graftm_silva_order = graftm_otu_silva_rarefied %>% 
+  group_by(Order) %>% 
+  count() %>% 
+  arrange(desc(n))
+
+graftm_silva_family = graftm_otu_silva_rarefied %>% 
+  group_by(Family) %>% 
+  count() %>% 
+  arrange(desc(n))
+
+graftm_silva_genus = graftm_otu_silva_rarefied %>% 
+  group_by(Genus) %>% 
+  count() %>% 
+  arrange(desc(n))
+
+graftm_silva_species = graftm_otu_silva_rarefied %>% 
+  group_by(Species) %>% 
+  count() %>% 
+  arrange(desc(n))
+
+graftm_silva_nrow = c(length(graftm_silva_phylums$n)-1, length(graftm_silva_class$n)-1, length(graftm_silva_order$n)-1, length(graftm_silva_family$n)-1, length(graftm_silva_genus$n)-1, length(graftm_silva_species$n)-1)
+
+
+taxonomic_levels = c("Phylum","Class","Order","Family","Genus","Species")
+
+graftm_silva_nrow_df = data.frame(taxonomic_levels, graftm_silva_nrow)
+graftm_silva_nrow_df$taxonomic_levels = factor(graftm_nrow_df$taxonomic_levels, ordered = TRUE, levels = c("Phylum","Class","Order","Family","Genus","Species")) 
+  
+graftm_silva_nrow_df_new = t(graftm_silva_nrow_df)
+graftm_silva_nrow_df_new = as.data.frame(graftm_silva_nrow_df_new)
+colnames(graftm_silva_nrow_df_new) = taxonomic_levels
+graftm_silva_nrow_df_new = graftm_silva_nrow_df_new[-1,]
+print(graftm_silva_nrow_df_new)
+
+comparison_silva_midas_nrow = graftm_silva_nrow_df_new %>% full_join(graftm_nrow_df_new) 
+rownames(comparison_silva_midas_nrow) = c("GraftM_Silva", "GraftM_Midas")
+print(comparison_silva_midas_nrow)
+
+
+graftm_silva_otu_rarefied_sum = graftm_otu_silva_rarefied %>% mutate(summed_reads = AalE_GraftM_Silva + AalW_GraftM_Silva + Aved_GraftM_Silva + Bjer_GraftM_Silva + Damh_GraftM_Silva + Ega_GraftM_Silva + Ejby_GraftM_Silva + EsbE_GraftM_Silva + EsbW_GraftM_Silva + Fred_GraftM_Silva + Hade_GraftM_Silva + Hirt_GraftM_Silva + Hjor_GraftM_Silva + Kalu_GraftM_Silva)
+
+graftm_silva_phylum_sum = aggregate(graftm_silva_otu_rarefied_sum$summed_reads, by=list(Category=graftm_silva_otu_rarefied_sum$Phylum), FUN=sum)
+graftm_silva_phylum_sum = graftm_silva_phylum_sum[-1,]
+
+graftm_silva_class_sum = aggregate(graftm_silva_otu_rarefied_sum$summed_reads, by=list(Category=graftm_silva_otu_rarefied_sum$Class), FUN=sum)
+graftm_silva_class_sum = graftm_silva_class_sum[-1,]
+
+graftm_silva_order_sum = aggregate(graftm_silva_otu_rarefied_sum$summed_reads, by=list(Category=graftm_silva_otu_rarefied_sum$Order), FUN=sum)
+graftm_silva_order_sum = graftm_silva_order_sum[-1,]
+
+graftm_silva_family_sum = aggregate(graftm_silva_otu_rarefied_sum$summed_reads, by=list(Category=graftm_silva_otu_rarefied_sum$Family), FUN=sum)
+graftm_silva_family_sum = graftm_silva_family_sum[-1,]
+
+graftm_silva_genus_sum = aggregate(graftm_silva_otu_rarefied_sum$summed_reads, by=list(Category=graftm_silva_otu_rarefied_sum$Genus), FUN=sum)
+graftm_silva_genus_sum = graftm_silva_genus_sum[-1,]
+
+graftm_silva_species_sum = aggregate(graftm_silva_otu_rarefied_sum$summed_reads, by=list(Category=graftm_silva_otu_rarefied_sum$Species), FUN=sum)
+graftm_silva_species_sum = graftm_silva_species_sum[-1,]
+
+graftm_silva_normalized = c(sum(graftm_silva_phylum_sum$x)/sum(graftm_silva_otu_rarefied_sum$summed_reads), sum(graftm_silva_class_sum$x)/sum(graftm_silva_otu_rarefied_sum$summed_reads), sum(graftm_silva_order_sum$x)/sum(graftm_silva_otu_rarefied_sum$summed_reads), sum(graftm_silva_family_sum$x)/sum(graftm_silva_otu_rarefied_sum$summed_reads), sum(graftm_silva_genus_sum$x)/sum(graftm_silva_otu_rarefied_sum$summed_reads), sum(graftm_silva_species_sum$x)/sum(graftm_silva_otu_rarefied_sum$summed_reads))
+
+graftm_silva_midas_normalized = data.frame(round(graftm_normalized,2), round(graftm_silva_normalized,2))
+graftm_silva_midas_normalized = t(graftm_silva_midas_normalized)
+colnames(graftm_silva_midas_normalized) = taxonomic_levels
+rownames(graftm_silva_midas_normalized) = c("GraftM_Midas", "GraftM_Silva")
+print(graftm_silva_midas_normalized)
+
+```
+
+```{r}
+amp_heatmap(graftm_comp_ampvis_rarefied, group_by = "Database", tax_aggregate = "Family", tax_empty = "remove", tax_show = 35, tax_add = "Phylum") + 
+  labs(title = "Taxonomic Level: Family") + 
+  theme(plot.title = element_text(size = 22, hjust = 0.5))
+
+amp_heatmap(graftm_comp_ampvis_rarefied, group_by = "Database", tax_aggregate = "Class", tax_empty = "remove", tax_show = 35, tax_add = "Phylum") + 
+  labs(title = "Taxonomic Level: Class") + 
+  theme(plot.title = element_text(size = 22, hjust = 0.5))
+
+amp_heatmap(graftm_comp_ampvis_rarefied, group_by = "Database", tax_aggregate = "Genus", tax_empty = "remove", tax_show = 35, tax_add = "Phylum") + 
+  labs(title = "Taxonomic Level: Genus") + 
+  theme(plot.title = element_text(size = 22, hjust = 0.5))
+
+amp_heatmap(graftm_comp_ampvis_rarefied, group_by = "Database", tax_aggregate = "Species", tax_empty = "remove", tax_show = 35, tax_add = "Phylum") + 
+  labs(title = "Taxonomic Level: Species") + 
+  theme(plot.title = element_text(size = 22, hjust = 0.5))
+```
+

@@ -1,0 +1,14 @@
+tab:metagenome-information
+fig:nice-fig
+tab:nice-tab
+analysis
+intro
+literature
+methods
+applications
+example-one
+example-two
+final-words
+graftm-analysis
+amplicon-compared-to-graftm
+graftm-silva-vs-midas

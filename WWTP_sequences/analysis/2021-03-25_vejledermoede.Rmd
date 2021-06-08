@@ -1,0 +1,57 @@
+---
+title: "Untitled"
+author: "FPlatz"
+date: "March 25, 2021"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Rarefraction curves
+```{r}
+amp_rarecurve(amplicon, color_by = "Plant") + 
+  ggtitle("Amplicon")
+amp_rarecurve(graftm, color_by = "Plant") + 
+  ggtitle("GraftM")
+```
+
+
+## Large scale differences at all taxonomic levels 
+```{r}
+ggplot(comparison_df, aes(x = taxonomic_levels, y = amplicon_nrow)) + 
+  geom_col(stat = "Identity") +
+  geom_point(aes(x = taxonomic_levels, y = graftm_nrow))  + 
+  scale_y_continuous(expand = c(0,0)) +
+  theme_classic() + 
+  theme(panel.grid.major = element_line(),panel.grid.minor = element_line())
+
+print(comparison_df_new)
+```
+
+
+## Unique OTUs 
+```{r}
+print(unique_otus)
+```
+
+## Differences in alpha diversity 
+```{r}
+ggplot(stats, aes(x = Classifier, y = Shannon)) + 
+  geom_boxplot() + 
+  theme_classic() + 
+  theme(panel.grid.major = element_line(),panel.grid.minor = element_line())
+```
+
+## Ordination 
+```{r}
+amp_ordinate(graftm, sample_color_by = "Plant", sample_label_by = "Plant") + 
+  ggtitle("GraftM")
+
+amp_ordinate(amplicon, sample_color_by = "Plant", sample_label_by = "Plant") + 
+  ggtitle("Amplicon")
+```
+

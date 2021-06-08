@@ -177,4 +177,6 @@ kaiju_ampvis_soil = amp_subset_samples(kaiju_ampvis, habitattype_new %in% c("agr
 
 amp_ordinate(kaiju_ampvis_soil, sample_color_by = "habitattype_new", sample_colorframe = TRUE, type = "PCA")
 
-
+mfd_metadata_filtered %>%
+  filter(habitattype_new == "agriculture") %>%
+  count()

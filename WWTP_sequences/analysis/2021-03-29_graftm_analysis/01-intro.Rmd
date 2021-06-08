@@ -1,0 +1,124 @@
+# Introduction {#intro}
+
+You can label chapter and section titles using `{#label}` after them, e.g., we can reference Chapter \@ref(intro). If you do not manually label them, there will be automatic labels anyway, e.g., Chapter \@ref(methods).
+
+Figures and tables with captions will be placed in `figure` and `table` environments, respectively.
+
+```{r nice-fig, fig.cap='Here is a nice figure!', out.width='80%', fig.asp=.75, fig.align='center'}
+par(mar = c(4, 4, .1, .1))
+plot(pressure, type = 'b', pch = 19)
+```
+
+Reference a figure by its code chunk label with the `fig:` prefix, e.g., see Figure \@ref(fig:nice-fig). Similarly, you can reference tables generated from `knitr::kable()`, e.g., see Table \@ref(tab:nice-tab).
+
+```{r nice-tab, tidy=FALSE}
+knitr::kable(
+  head(iris, 20), caption = 'Here is a nice table!',
+  booktabs = TRUE
+)
+```
+
+You can write citations, too. For example, we are using the **bookdown** package [@R-bookdown] in this sample book, which was built on top of R Markdown and **knitr** [@xie2015].
+
+```{r}
+library(bookdown)
+library(dplyr)
+library(readxl)
+library(ampvis2)
+library(knitr)
+```
+
+```{r}
+metadata = read_excel("/srv/MA/Projects/microflora_danica/analysis/projects/MFD_seges/data/WWTP_sequences/2021-02-09_WWTP_metadata.xlsx")
+kraken_refseq = read.csv("/srv/MA/Projects/microflora_danica/analysis/projects/MFD_seges/results/WWTP_sequences/kraken2/bac_refseq/kraken_ampvis_otu/kraken_bac_refseq_combined.csv")
+kraken_refseq_wwtp = read.csv("/srv/MA/Projects/microflora_danica/analysis/projects/MFD_seges/results/WWTP_sequences/kraken2/bac_refseq_WWTP/kraken_ampvis_otu/kraken_bac_refseq_wwtp_combined.csv")
+kraken_wwtp = read.csv("/srv/MA/Projects/microflora_danica/analysis/projects/MFD_seges/results/WWTP_sequences/kraken2/Arc_refseq_WWTP/kraken_ampvis_otu/kraken_arc_refseq_combined.csv")
+kraken_gtdb = read.csv("/srv/MA/Projects/microflora_danica/analysis/projects/MFD_seges/results/WWTP_sequences/kraken2/GTDB/kraken_ampvis_otu/kraken_gtdb_combined.csv")
+
+## Joining tables 
+data_kraken_full_join = kraken_refseq %>% 
+  full_join(kraken_refseq_wwtp, by = c("OTU", "Kingdom","Phylum","Class","Order","Family","Genus","Species")) %>% 
+  full_join(kraken_wwtp, by = c("OTU", "Kingdom","Phylum","Class","Order","Family","Genus","Species")) %>% 
+  full_join(kraken_gtdb, by = c("OTU", "Kingdom","Phylum","Class","Order","Family","Genus","Species"))
+data_kraken_full_join = data_kraken_full_join[,c(1:16,24:68,17:23)]
+
+## Ampvis objects 
+kraken_fj_ampvis = amp_load(otutable = data_kraken_full_join, metadata = metadata)
+kraken_gtdb_ampvis = amp_subset_samples(kraken_fj_ampvis, Database == "GTDB")
+kraken_refseq_refseqwwtp_ampvis = amp_subset_samples(kraken_fj_ampvis, !Database %in% c("WWTP","GTDB"))
+kraken_gtdb_excluded = amp_subset_samples(kraken_fj_ampvis, !Database %in% "GTDB") 
+kraken_gtdb_only = amp_subset_samples(kraken_fj_ampvis, Database %in% "GTDB")
+stats_kraken = amp_alphadiv(kraken_fj_ampvis)
+stats_kraken_gtdb_excluded = amp_alphadiv(kraken_gtdb_excluded)
+stats_kraken_only = amp_alphadiv(kraken_gtdb_only) 
+```
+
+```{r}
+stats_kraken_gtdb_excluded %>% 
+  mutate(normalized_reads = Reads / Metagenome_size_at) %>% 
+  ggplot(aes(x = Database, y = normalized_reads)) + 
+    geom_jitter(aes(color = Plant)) + 
+    theme_classic() + 
+    theme(panel.grid.major = element_line(color = "grey90"),
+          panel.grid.minor = element_line(color = "grey90")) + 
+    ylab("Classified Reads") + 
+    ylim(c(0,1))
+
+stats_kraken %>% 
+  mutate(normalized_reads = Reads / Metagenome_size_at) %>% 
+  ggplot(aes(x = Database, y = normalized_reads)) + 
+    geom_boxplot() + 
+    theme_classic() + 
+    theme(panel.grid.major = element_line(color = "grey90"),
+          panel.grid.minor = element_line(color = "grey90")) + 
+    ylab("Classified Reads") + 
+    ylim(c(0,1))
+
+stats_kraken_only %>% 
+  mutate(normalized_reads = Reads / Metagenome_size_at) %>% 
+  ggplot(aes(x = Database, y = normalized_reads)) + 
+    geom_jitter(aes(color = Plant)) + 
+    theme_classic() + 
+    theme(panel.grid.major = element_line(color = "grey90"),
+          panel.grid.minor = element_line(color = "grey90")) + 
+    ylab("Classified Reads") + 
+    ylim(c(0,1))
+```
+
+```{r}
+amp_heatmap(kraken_gtdb_excluded, 
+            group_by = "Database", 
+            tax_empty = "remove", 
+            normalise = FALSE, 
+            tax_aggregate = "Species") + 
+  labs(title = "Taxonomic Level: Species") + 
+  theme(plot.title = element_text(size = 15, hjust = 0.5))
+
+amp_heatmap(kraken_gtdb_excluded, 
+            group_by = "Database", 
+            tax_empty = "remove", 
+            normalise = FALSE, 
+            tax_aggregate = "Genus") + 
+  labs(title = "Taxonomic Level: Genus") + 
+  theme(plot.title = element_text(size = 15, hjust = 0.5))
+
+amp_heatmap(kraken_gtdb_excluded, 
+            group_by = "Database", 
+            tax_empty = "remove", 
+            normalise = FALSE, 
+            tax_aggregate = "Family") + 
+  labs(title = "Taxonomic Level: Family") + 
+  theme(plot.title = element_text(size = 15, hjust = 0.5))
+
+amp_heatmap(kraken_gtdb_excluded, 
+            group_by = "Database", 
+            tax_empty = "remove", 
+            normalise = FALSE, 
+            tax_aggregate = "Order") + 
+  labs(title = "Taxonomic Level: Order") + 
+  theme(plot.title = element_text(size = 15, hjust = 0.5))
+
+amp_heatmap(kraken_gtdb_only, group_by = "Database", tax_empty = "remove", normalise = FALSE, tax_aggregate = "Species")
+
+```
+

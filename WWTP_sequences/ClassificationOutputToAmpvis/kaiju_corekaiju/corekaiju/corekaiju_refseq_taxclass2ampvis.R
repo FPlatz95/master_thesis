@@ -6,6 +6,7 @@ library(stringr)
 corekaiju=function(kaiju,pfam){
   kaiju%>%
     inner_join(pfam,by=c("taxon_id"),suffix=c("_kaiju","_pfam"))%>%
+    filter(reads_pfam > 20) %>%
     select(c("file_kaiju", "percent_kaiju", "reads_kaiju", "taxon_id", "taxon_name_kaiju"))
 }
 
@@ -46,4 +47,4 @@ corekaiju = corekaiju(kaiju_file, corekaiju_file)
 corekaiju_ampvis_otu = kaijutootutable(corekaiju)
 corekaiju_ampvis_otu = corekaiju_ampvis_otu %>% rename(!!filename := reads_kaiju)
 
-write.csv(corekaiju_ampvis_otu, paste0("/srv/MA/Projects/microflora_danica/analysis/projects/MFD_seges/results/WWTP_sequences/kaiju/corekaiju/refseq_ampvis_otu/",filename,"_corekaiju_refseq_ampvisotu.csv"), row.names = FALSE)
+write.csv(corekaiju_ampvis_otu, paste0("/srv/MA/Projects/microflora_danica/analysis/projects/MFD_seges/results/WWTP_sequences/kaiju/corekaiju/refseq_t20_ampvis_otu/",filename,"_corekaiju_refseq_ampvisotu.csv"), row.names = FALSE)

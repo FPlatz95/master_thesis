@@ -1,8 +1,7 @@
 filename=commandArgs(trailingOnly = F)
 
 library(dplyr)
-
-
+library(readr)
 
 combineotu=function(total,input){
   data=total%>%
@@ -12,17 +11,17 @@ combineotu=function(total,input){
   if (total$Kingdom[1]=="Dummy"){
     #print("DummyTrue")
     output=data%>%
-      mutate(OTU=paste0("OTU",1:nrow(data),"_graftm_midas"))%>% #Change this line
+      mutate(OTU=paste0("OTU",1:nrow(data),"_corekaiju_t20"))%>% #Change this line
       select(OTU,(ncol(data)),Kingdom,Phylum,Class,Order,Family,Genus,Species)%>%
       filter(Kingdom!="Dummy")
   }
   else{
     output=data%>%
-      mutate(OTU=paste0("OTU",1:nrow(data),"_graftm_midas")) #Change this line
+      mutate(OTU=paste0("OTU",1:nrow(data),"_corekaiju_t20")) #Change this line
   }
 }
 
-total_otu_table=read.csv("/srv/MA/Projects/microflora_danica/analysis/projects/MFD_seges/results/WWTP_sequences/graftM/01_midas_combined_count/ampvis_otu/graftm_midas_combined_otu.csv",header=T,stringsAsFactors = F) #Change this line
-file2=read.csv(filename[6],header=T,stringsAsFactors = F)
+total_otu_table=read_csv("/srv/MA/Projects/microflora_danica/analysis/projects/MFD_seges/results/WWTP_sequences/kaiju/corekaiju/refseq_t20_ampvis_otu/corekaiju_refseq_t20_ampvis_combined.csv") #Change this line
+file2=read_csv(filename[6])
 otu=combineotu(total_otu_table,file2)
-write.csv(otu,"/srv/MA/Projects/microflora_danica/analysis/projects/MFD_seges/results/WWTP_sequences/graftM/01_midas_combined_count/ampvis_otu/graftm_midas_combined_otu.csv",row.names=F) #Change this line
+write.csv(otu,"/srv/MA/Projects/microflora_danica/analysis/projects/MFD_seges/results/WWTP_sequences/kaiju/corekaiju/refseq_t20_ampvis_otu/corekaiju_refseq_t20_ampvis_combined.csv",row.names=F) #Change this line

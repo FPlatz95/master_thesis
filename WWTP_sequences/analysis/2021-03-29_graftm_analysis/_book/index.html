@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>GraftM Analysis</title>
+  <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="GraftM Analysis" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="GraftM Analysis" />
+  
+  <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  
+
+<meta name="author" content="FPlatz16" />
+
+
+<meta name="date" content="2021-04-05" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+<link rel="next" href="intro.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> GraftM Analysis</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#amplicon-compared-to-graftm"><i class="fa fa-check"></i><b>1.1</b> Amplicon compared to GraftM</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#graftm-silva-vs-midas"><i class="fa fa-check"></i><b>1.2</b> GraftM Silva vs Midas</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Introduction</a></li>
+<li class="chapter" data-level="3" data-path="literature.html"><a href="literature.html"><i class="fa fa-check"></i><b>3</b> Literature</a></li>
+<li class="chapter" data-level="4" data-path="methods.html"><a href="methods.html"><i class="fa fa-check"></i><b>4</b> Methods</a></li>
+<li class="chapter" data-level="5" data-path="applications.html"><a href="applications.html"><i class="fa fa-check"></i><b>5</b> Applications</a><ul>
+<li class="chapter" data-level="5.1" data-path="applications.html"><a href="applications.html#example-one"><i class="fa fa-check"></i><b>5.1</b> Example one</a></li>
+<li class="chapter" data-level="5.2" data-path="applications.html"><a href="applications.html#example-two"><i class="fa fa-check"></i><b>5.2</b> Example two</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="final-words.html"><a href="final-words.html"><i class="fa fa-check"></i><b>6</b> Final Words</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">GraftM Analysis</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title">GraftM Analysis</h1>
+<p class="author"><em>FPlatz16</em></p>
+<p class="date"><em>2021-04-05</em></p>
+</div>
+<div id="graftm-analysis" class="section level1">
+<h1><span class="header-section-number">Chapter 1</span> GraftM Analysis</h1>
+<p>GraftM was used to make taxonomic classification of 14 metagenomes from danish WWTP. A custom GraftM package was created, using the MIDAS 3.7 database to search for 16S rRNA genes. GraftM classifies reads using an hmm search, and subsequently assigns taxonomy by placing the reads into a prebuild phylogenetic tree. The metagenomes used in this study are described in Table <a href="#tab:metagenome-information"><strong>??</strong></a></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">metadata =<span class="st"> </span><span class="kw">read_excel</span>(<span class="st">&quot;/srv/MA/Projects/microflora_danica/analysis/projects/MFD_seges/data/WWTP_sequences/2021-02-09_WWTP_metadata.xlsx&quot;</span>)
+metadata_filtered =<span class="st"> </span>metadata <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Classifier <span class="op">==</span><span class="st"> &quot;GraftM&quot;</span>, Database <span class="op">==</span><span class="st"> &quot;MIDAS&quot;</span>) 
+
+<span class="kw">print</span>(metadata_filtered[,<span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>,<span class="op">-</span><span class="dv">2</span>,<span class="op">-</span><span class="dv">3</span>)])</code></pre></div>
+<pre><code>## # A tibble: 14 x 8
+##    Plant       Configuration Design ReturnSludgeSidestr… PrimarySetling Digester
+##    &lt;chr&gt;       &lt;chr&gt;         &lt;chr&gt;  &lt;chr&gt;                &lt;chr&gt;          &lt;chr&gt;   
+##  1 Aalborg_Ea… Alternating   EBPR   YES                  NO             YES     
+##  2 Aalborg_W   Alternating   EBPR   YES                  YES            YES     
+##  3 Avedøre     Alternating   EBPR   NO                   NO             YES     
+##  4 Bjergmarken Alternating   EBPR   NO                   NO             YES     
+##  5 Damhusåen   Alternating   EBPR   NO                   YES            YES     
+##  6 Egå         Recirculation EBPR   YES                  NO             NO      
+##  7 Ejby Mølle  Alternating   EBPR   NO                   YES            YES     
+##  8 Esbjerg_E   Recirculation BNR    NO                   YES            YES     
+##  9 Esbjerg_W   Recirculation BNR    NO                   YES            YES     
+## 10 Fredericia  Recirculation EBPR   NO                   NO             YES     
+## 11 Haderslev   Alternating   EBPR   YES                  NO             NO      
+## 12 Hirtshals   Alternating   EBPR   NO                   NO             NO      
+## 13 Hjørring    Recirculation EBPR   NO                   YES            YES     
+## 14 Kalundborg  Alternating   BNR    NO                   NO             NO      
+## # … with 2 more variables: lib_conc(ng/µl) &lt;dbl&gt;, extrac_conc(ng/µl) &lt;dbl&gt;</code></pre>
+<p>GraftM extracts reads and assigns these a taxonomic classification. To evaluate this,a comparison between reads extracted and reads classified were made:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">stats_graftm =<span class="st"> </span>stats_graftm <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">arrange</span>(Plant)
+wwtp_plants =<span class="st"> </span>stats_graftm<span class="op">$</span>Plant
+reads_classified =<span class="st"> </span>stats_graftm<span class="op">$</span>Reads 
+reads_extracted =<span class="st"> </span><span class="kw">c</span>(<span class="dv">8317</span>, <span class="dv">7455</span>, <span class="dv">5830</span>, <span class="dv">6889</span>, <span class="dv">7916</span>, <span class="dv">7668</span>, <span class="dv">6527</span>, <span class="dv">6866</span>, <span class="dv">6964</span>, <span class="dv">7950</span>, <span class="dv">7292</span>, <span class="dv">7194</span>, <span class="dv">6247</span>, <span class="dv">7705</span>)
+metagenome_size =<span class="st"> </span><span class="kw">c</span>(<span class="dv">17056633</span>, <span class="dv">16547260</span>, <span class="dv">14846304</span>, <span class="dv">15870938</span>, <span class="dv">19764160</span>, <span class="dv">16805544</span>, <span class="dv">15488718</span>, <span class="dv">16159208</span>, <span class="dv">17137236</span>, <span class="dv">19515615</span>, <span class="dv">15127001</span>, <span class="dv">17891614</span>, <span class="dv">15305860</span>, <span class="dv">20471072</span>)
+
+graftm_reads_comp =<span class="st"> </span><span class="kw">data.frame</span>(reads_extracted, reads_classified, metagenome_size)
+graftm_reads_comp =<span class="st"> </span>graftm_reads_comp <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">rRNA_per_genome =</span> reads_extracted <span class="op">/</span><span class="st"> </span>(metagenome_size <span class="op">/</span><span class="st"> </span>(<span class="dv">3500000</span><span class="op">/</span><span class="dv">1550</span>)))
+graftm_reads_comp =<span class="st"> </span>graftm_reads_comp <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">reads_unclassified =</span> reads_extracted <span class="op">-</span><span class="st"> </span>reads_classified) 
+graftm_reads_comp =<span class="st"> </span>graftm_reads_comp[,<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">3</span>,<span class="dv">4</span>)]
+graftm_reads_comp<span class="op">$</span>rRNA_per_genome =<span class="st"> </span><span class="kw">round</span>(graftm_reads_comp<span class="op">$</span>rRNA_per_genome, <span class="dv">2</span>)
+<span class="kw">colnames</span>(graftm_reads_comp) =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Extracted Reads&quot;</span>, <span class="st">&quot;Classified Reads&quot;</span>,<span class="st">&quot;Unclassified Reads&quot;</span> ,<span class="st">&quot;Metagenome Size (Reads)&quot;</span>, <span class="st">&quot;Theoretical 16S rRNA per genome&quot;</span>)
+<span class="kw">rownames</span>(graftm_reads_comp) =<span class="st"> </span>stats_graftm<span class="op">$</span>Plant 
+
+<span class="kw">print</span>(graftm_reads_comp)</code></pre></div>
+<pre><code>##              Extracted Reads Classified Reads Unclassified Reads
+## Aalborg_East            8317             5801               2516
+## Aalborg_W               7455             5801               1654
+## Avedøre                 5830             5801                 29
+## Bjergmarken             6889             5801               1088
+## Damhusåen               7916             5801               2115
+## Egå                     7668             5801               1867
+## Ejby Mølle              6527             5801                726
+## Esbjerg_E               6866             5801               1065
+## Esbjerg_W               6964             5801               1163
+## Fredericia              7950             5801               2149
+## Haderslev               7292             5801               1491
+## Hirtshals               7194             5801               1393
+## Hjørring                6247             5801                446
+## Kalundborg              7705             5801               1904
+##              Metagenome Size (Reads) Theoretical 16S rRNA per genome
+## Aalborg_East                17056633                            1.10
+## Aalborg_W                   16547260                            1.02
+## Avedøre                     14846304                            0.89
+## Bjergmarken                 15870938                            0.98
+## Damhusåen                   19764160                            0.90
+## Egå                         16805544                            1.03
+## Ejby Mølle                  15488718                            0.95
+## Esbjerg_E                   16159208                            0.96
+## Esbjerg_W                   17137236                            0.92
+## Fredericia                  19515615                            0.92
+## Haderslev                   15127001                            1.09
+## Hirtshals                   17891614                            0.91
+## Hjørring                    15305860                            0.92
+## Kalundborg                  20471072                            0.85</code></pre>
+<p>While the average bacterial genomes contains 4.2 rRNA genes, it seems that GraftM might not extract all 16S rRNA genes from the metagenomes. This hypothesis sits under the assumption that all reads in the metagenome are equally distributed throughout the bacterial genome.</p>
+<p>We rarefied the samples to 5801 (The samples with the lowest ammount of reads) to investigate how the taxonomic classification was distributed over different taxonomic ranks:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">amp_rarecurve</span>(graftm_ampvis, <span class="dt">color_by =</span> <span class="st">&quot;Plant&quot;</span>, <span class="dt">stepsize =</span> <span class="dv">200</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept=</span><span class="dv">5800</span>, <span class="dt">color =</span> <span class="st">&quot;darkred&quot;</span>, <span class="dt">lty =</span> <span class="dv">2</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">xlim</span>(<span class="dv">0</span>,<span class="dv">60000</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ylim</span>(<span class="dv">0</span>,<span class="dv">2500</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;GraftM&quot;</span>)</code></pre></div>
+<p><img src="2021-03-29_graftm_analysis_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">amp_rarecurve</span>(graftm_ampvis_rarefied, <span class="dt">color_by =</span> <span class="st">&quot;Plant&quot;</span>, <span class="dt">stepsize =</span> <span class="dv">200</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">xlim</span>(<span class="dv">0</span>,<span class="dv">6000</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ylim</span>(<span class="dv">0</span>,<span class="dv">1200</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;GraftM&quot;</span>)</code></pre></div>
+<p><img src="2021-03-29_graftm_analysis_files/figure-html/unnamed-chunk-5-2.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">amp_export_otutable</span>(graftm_ampvis_rarefied, <span class="st">&quot;/srv/MA/Projects/microflora_danica/analysis/projects/MFD_seges/results/WWTP_sequences/graftM/01_midas_combined_count/ampvis_otu/graftm_midas_otu_rarefied&quot;</span>)
+graftm_otu_rarefied =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;/srv/MA/Projects/microflora_danica/analysis/projects/MFD_seges/results/WWTP_sequences/graftM/01_midas_combined_count/ampvis_otu/graftm_midas_otu_rarefied.csv&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>)
+
+graftm_phylums =<span class="st"> </span>graftm_otu_rarefied <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(Phylum) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">count</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(n))
+
+graftm_class =<span class="st"> </span>graftm_otu_rarefied <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(Class) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">count</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(n))
+
+graftm_order =<span class="st"> </span>graftm_otu_rarefied <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(Order) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">count</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(n))
+
+graftm_family =<span class="st"> </span>graftm_otu_rarefied <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(Family) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">count</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(n))
+
+graftm_genus =<span class="st"> </span>graftm_otu_rarefied <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(Genus) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">count</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(n))
+
+graftm_species =<span class="st"> </span>graftm_otu_rarefied <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(Species) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">count</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(n))
+
+graftm_nrow =<span class="st"> </span><span class="kw">c</span>(<span class="kw">length</span>(graftm_phylums<span class="op">$</span>n)<span class="op">-</span><span class="dv">1</span>, <span class="kw">length</span>(graftm_class<span class="op">$</span>n)<span class="op">-</span><span class="dv">1</span>, <span class="kw">length</span>(graftm_order<span class="op">$</span>n)<span class="op">-</span><span class="dv">1</span>, <span class="kw">length</span>(graftm_family<span class="op">$</span>n)<span class="op">-</span><span class="dv">1</span>, <span class="kw">length</span>(graftm_genus<span class="op">$</span>n)<span class="op">-</span><span class="dv">1</span>, <span class="kw">length</span>(graftm_species<span class="op">$</span>n)<span class="op">-</span><span class="dv">1</span>)
+
+
+taxonomic_levels =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Phylum&quot;</span>,<span class="st">&quot;Class&quot;</span>,<span class="st">&quot;Order&quot;</span>,<span class="st">&quot;Family&quot;</span>,<span class="st">&quot;Genus&quot;</span>,<span class="st">&quot;Species&quot;</span>)
+
+graftm_nrow_df =<span class="st"> </span><span class="kw">data.frame</span>(taxonomic_levels, graftm_nrow)
+graftm_nrow_df<span class="op">$</span>taxonomic_levels =<span class="st"> </span><span class="kw">factor</span>(graftm_nrow_df<span class="op">$</span>taxonomic_levels, <span class="dt">ordered =</span> <span class="ot">TRUE</span>, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;Phylum&quot;</span>,<span class="st">&quot;Class&quot;</span>,<span class="st">&quot;Order&quot;</span>,<span class="st">&quot;Family&quot;</span>,<span class="st">&quot;Genus&quot;</span>,<span class="st">&quot;Species&quot;</span>)) 
+  
+graftm_nrow_df_new =<span class="st"> </span><span class="kw">t</span>(graftm_nrow_df)
+graftm_nrow_df_new =<span class="st"> </span><span class="kw">as.data.frame</span>(graftm_nrow_df_new)
+<span class="kw">colnames</span>(graftm_nrow_df_new) =<span class="st"> </span>taxonomic_levels
+graftm_nrow_df_new =<span class="st"> </span>graftm_nrow_df_new[<span class="op">-</span><span class="dv">1</span>,]
+<span class="kw">print</span>(graftm_nrow_df_new)</code></pre></div>
+<pre><code>##             Phylum Class Order Family Genus Species
+## graftm_nrow     33    73   180    365   765     869</code></pre>
+<div id="amplicon-compared-to-graftm" class="section level2">
+<h2><span class="header-section-number">1.1</span> Amplicon compared to GraftM</h2>
+<p>Rarefraction of amplicon samples:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">amp_rarecurve</span>(amplicon_ampvis, <span class="dt">color_by =</span> <span class="st">&quot;Plant&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept=</span><span class="dv">5800</span>, <span class="dt">color =</span> <span class="st">&quot;darkred&quot;</span>, <span class="dt">lty =</span> <span class="dv">2</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">xlim</span>(<span class="dv">0</span>,<span class="dv">100000</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ylim</span>(<span class="dv">0</span>,<span class="dv">2500</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Amplicon&quot;</span>)</code></pre></div>
+<p><img src="2021-03-29_graftm_analysis_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">amp_rarecurve</span>(amplicon_ampvis_rarefied, <span class="dt">color_by =</span> <span class="st">&quot;Plant&quot;</span>, <span class="dt">stepsize =</span> <span class="dv">200</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">xlim</span>(<span class="dv">0</span>,<span class="dv">10000</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ylim</span>(<span class="dv">0</span>,<span class="dv">1200</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Amplicon&quot;</span>)</code></pre></div>
+<p><img src="2021-03-29_graftm_analysis_files/figure-html/unnamed-chunk-7-2.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">amp_export_otutable</span>(amplicon_ampvis_rarefied, <span class="st">&quot;/srv/MA/Projects/microflora_danica/analysis/projects/MFD_seges/results/WWTP_sequences/amplicon/ampvis_otu/amplicon_midas_otu_rarefied&quot;</span>)
+amplicon_otu_rarefied =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;/srv/MA/Projects/microflora_danica/analysis/projects/MFD_seges/results/WWTP_sequences/amplicon/ampvis_otu/amplicon_midas_otu_rarefied.csv&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>)
+
+amplicon_phylums =<span class="st"> </span>amplicon_otu_rarefied <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(Phylum) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">count</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(n))
+
+amplicon_class =<span class="st"> </span>amplicon_otu_rarefied <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(Class) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">count</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(n))
+
+amplicon_order =<span class="st"> </span>amplicon_otu_rarefied <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(Order) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">count</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(n))
+
+amplicon_family =<span class="st"> </span>amplicon_otu_rarefied <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(Family) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">count</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(n))
+
+amplicon_genus =<span class="st"> </span>amplicon_otu_rarefied <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(Genus) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">count</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(n))
+
+amplicon_species =<span class="st"> </span>amplicon_otu_rarefied <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(Species) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">count</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(n))
+
+amplicon_nrow =<span class="st"> </span><span class="kw">c</span>(<span class="kw">length</span>(amplicon_phylums<span class="op">$</span>n)<span class="op">-</span><span class="dv">1</span>, <span class="kw">length</span>(amplicon_class<span class="op">$</span>n)<span class="op">-</span><span class="dv">1</span>, <span class="kw">length</span>(amplicon_order<span class="op">$</span>n)<span class="op">-</span><span class="dv">1</span>, <span class="kw">length</span>(amplicon_family<span class="op">$</span>n)<span class="op">-</span><span class="dv">1</span>, <span class="kw">length</span>(amplicon_genus<span class="op">$</span>n)<span class="op">-</span><span class="dv">1</span>, <span class="kw">length</span>(amplicon_species<span class="op">$</span>n)<span class="op">-</span><span class="dv">1</span>)
+
+amplicon_nrow_df =<span class="st"> </span><span class="kw">data.frame</span>(taxonomic_levels, amplicon_nrow)
+amplicon_nrow_df<span class="op">$</span>taxonomic_levels =<span class="st"> </span><span class="kw">factor</span>(amplicon_nrow_df<span class="op">$</span>taxonomic_levels, <span class="dt">ordered =</span> <span class="ot">TRUE</span>, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;Phylum&quot;</span>,<span class="st">&quot;Class&quot;</span>,<span class="st">&quot;Order&quot;</span>,<span class="st">&quot;Family&quot;</span>,<span class="st">&quot;Genus&quot;</span>,<span class="st">&quot;Species&quot;</span>)) 
+
+amplicon_nrow_df_new =<span class="st"> </span><span class="kw">t</span>(amplicon_nrow_df)
+amplicon_nrow_df_new =<span class="st"> </span><span class="kw">as.data.frame</span>(amplicon_nrow_df_new)
+<span class="kw">colnames</span>(amplicon_nrow_df_new) =<span class="st"> </span>taxonomic_levels
+amplicon_nrow_df_new =<span class="st"> </span>amplicon_nrow_df_new[<span class="op">-</span><span class="dv">1</span>,]
+
+comparison_nrow =<span class="st"> </span>amplicon_nrow_df_new <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">full_join</span>(graftm_nrow_df_new) </code></pre></div>
+<pre><code>## Joining, by = c(&quot;Phylum&quot;, &quot;Class&quot;, &quot;Order&quot;, &quot;Family&quot;, &quot;Genus&quot;, &quot;Species&quot;)</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rownames</span>(comparison_nrow) =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Amplicon&quot;</span>, <span class="st">&quot;GraftM&quot;</span>)
+
+<span class="kw">print</span>(comparison_nrow)</code></pre></div>
+<pre><code>##          Phylum Class Order Family Genus Species
+## Amplicon     35    77   180    394  1187    2523
+## GraftM       33    73   180    365   765     869</code></pre>
+<p>We also investigated the normalized total number of reads at each taxonomic classification.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">graftm_otu_rarefied_sum =<span class="st"> </span>graftm_otu_rarefied <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">summed_reads =</span> AalE_GraftM_Midas <span class="op">+</span><span class="st"> </span>AalW_GraftM_Midas <span class="op">+</span><span class="st"> </span>Aved_GraftM_Midas <span class="op">+</span><span class="st"> </span>Bjer_GraftM_Midas <span class="op">+</span><span class="st"> </span>Damh_GraftM_Midas <span class="op">+</span><span class="st"> </span>Ega_GraftM_Midas <span class="op">+</span><span class="st"> </span>Ejby_GraftM_Midas <span class="op">+</span><span class="st"> </span>EsbE_GraftM_Midas <span class="op">+</span><span class="st"> </span>EsbW_GraftM_Midas <span class="op">+</span><span class="st"> </span>Fred_GraftM_Midas <span class="op">+</span><span class="st"> </span>Hade_GraftM_Midas <span class="op">+</span><span class="st"> </span>Hirt_GraftM_Midas <span class="op">+</span><span class="st"> </span>Hjor_GraftM_Midas <span class="op">+</span><span class="st"> </span>Kalu_GraftM_Midas)
+
+graftm_phylum_sum =<span class="st"> </span><span class="kw">aggregate</span>(graftm_otu_rarefied_sum<span class="op">$</span>summed_reads, <span class="dt">by=</span><span class="kw">list</span>(<span class="dt">Category=</span>graftm_otu_rarefied_sum<span class="op">$</span>Phylum), <span class="dt">FUN=</span>sum)
+graftm_phylum_sum =<span class="st"> </span>graftm_phylum_sum[<span class="op">-</span><span class="dv">1</span>,]
+
+graftm_class_sum =<span class="st"> </span><span class="kw">aggregate</span>(graftm_otu_rarefied_sum<span class="op">$</span>summed_reads, <span class="dt">by=</span><span class="kw">list</span>(<span class="dt">Category=</span>graftm_otu_rarefied_sum<span class="op">$</span>Class), <span class="dt">FUN=</span>sum)
+graftm_class_sum =<span class="st"> </span>graftm_class_sum[<span class="op">-</span><span class="dv">1</span>,]
+
+graftm_order_sum =<span class="st"> </span><span class="kw">aggregate</span>(graftm_otu_rarefied_sum<span class="op">$</span>summed_reads, <span class="dt">by=</span><span class="kw">list</span>(<span class="dt">Category=</span>graftm_otu_rarefied_sum<span class="op">$</span>Order), <span class="dt">FUN=</span>sum)
+graftm_order_sum =<span class="st"> </span>graftm_order_sum[<span class="op">-</span><span class="dv">1</span>,]
+
+graftm_family_sum =<span class="st"> </span><span class="kw">aggregate</span>(graftm_otu_rarefied_sum<span class="op">$</span>summed_reads, <span class="dt">by=</span><span class="kw">list</span>(<span class="dt">Category=</span>graftm_otu_rarefied_sum<span class="op">$</span>Family), <span class="dt">FUN=</span>sum)
+graftm_family_sum =<span class="st"> </span>graftm_family_sum[<span class="op">-</span><span class="dv">1</span>,]
+
+graftm_genus_sum =<span class="st"> </span><span class="kw">aggregate</span>(graftm_otu_rarefied_sum<span class="op">$</span>summed_reads, <span class="dt">by=</span><span class="kw">list</span>(<span class="dt">Category=</span>graftm_otu_rarefied_sum<span class="op">$</span>Genus), <span class="dt">FUN=</span>sum)
+graftm_genus_sum =<span class="st"> </span>graftm_genus_sum[<span class="op">-</span><span class="dv">1</span>,]
+
+graftm_species_sum =<span class="st"> </span><span class="kw">aggregate</span>(graftm_otu_rarefied_sum<span class="op">$</span>summed_reads, <span class="dt">by=</span><span class="kw">list</span>(<span class="dt">Category=</span>graftm_otu_rarefied_sum<span class="op">$</span>Species), <span class="dt">FUN=</span>sum)
+graftm_species_sum =<span class="st"> </span>graftm_species_sum[<span class="op">-</span><span class="dv">1</span>,]
+
+graftm_normalized =<span class="st"> </span><span class="kw">c</span>(<span class="kw">sum</span>(graftm_phylum_sum<span class="op">$</span>x)<span class="op">/</span><span class="kw">sum</span>(graftm_otu_rarefied_sum<span class="op">$</span>summed_reads), <span class="kw">sum</span>(graftm_class_sum<span class="op">$</span>x)<span class="op">/</span><span class="kw">sum</span>(graftm_otu_rarefied_sum<span class="op">$</span>summed_reads), <span class="kw">sum</span>(graftm_order_sum<span class="op">$</span>x)<span class="op">/</span><span class="kw">sum</span>(graftm_otu_rarefied_sum<span class="op">$</span>summed_reads), <span class="kw">sum</span>(graftm_family_sum<span class="op">$</span>x)<span class="op">/</span><span class="kw">sum</span>(graftm_otu_rarefied_sum<span class="op">$</span>summed_reads), <span class="kw">sum</span>(graftm_genus_sum<span class="op">$</span>x)<span class="op">/</span><span class="kw">sum</span>(graftm_otu_rarefied_sum<span class="op">$</span>summed_reads), <span class="kw">sum</span>(graftm_species_sum<span class="op">$</span>x)<span class="op">/</span><span class="kw">sum</span>(graftm_otu_rarefied_sum<span class="op">$</span>summed_reads))
+
+
+amplicon_otu_rarefied_sum =<span class="st"> </span>amplicon_otu_rarefied <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">summed_reads =</span> AalE_Amplicon_Midas <span class="op">+</span><span class="st"> </span>AalW_Amplicon_Midas <span class="op">+</span><span class="st"> </span>Aved_Amplicon_Midas <span class="op">+</span><span class="st"> </span>Bjer_Amplicon_Midas <span class="op">+</span><span class="st"> </span>Damh_Amplicon_Midas <span class="op">+</span><span class="st"> </span>Ega_Amplicon_Midas <span class="op">+</span><span class="st"> </span>Ejby_Amplicon_Midas <span class="op">+</span><span class="st"> </span>EsbE_Amplicon_Midas <span class="op">+</span><span class="st"> </span>EsbW_Amplicon_Midas <span class="op">+</span><span class="st"> </span>Fred_Amplicon_Midas <span class="op">+</span><span class="st"> </span>Hade_Amplicon_Midas <span class="op">+</span><span class="st"> </span>Hirt_Amplicon_Midas <span class="op">+</span><span class="st"> </span>Hjor_Amplicon_Midas <span class="op">+</span><span class="st"> </span>Kalu_Amplicon_Midas)
+
+amplicon_phylum_sum =<span class="st"> </span><span class="kw">aggregate</span>(amplicon_otu_rarefied_sum<span class="op">$</span>summed_reads, <span class="dt">by=</span><span class="kw">list</span>(<span class="dt">Category=</span>amplicon_otu_rarefied_sum<span class="op">$</span>Phylum), <span class="dt">FUN=</span>sum)
+amplicon_phylum_sum =<span class="st"> </span>amplicon_phylum_sum[<span class="op">-</span><span class="dv">1</span>,]
+
+amplicon_class_sum =<span class="st"> </span><span class="kw">aggregate</span>(amplicon_otu_rarefied_sum<span class="op">$</span>summed_reads, <span class="dt">by=</span><span class="kw">list</span>(<span class="dt">Category=</span>amplicon_otu_rarefied_sum<span class="op">$</span>Class), <span class="dt">FUN=</span>sum)
+amplicon_class_sum =<span class="st"> </span>amplicon_class_sum[<span class="op">-</span><span class="dv">1</span>,]
+
+amplicon_order_sum =<span class="st"> </span><span class="kw">aggregate</span>(amplicon_otu_rarefied_sum<span class="op">$</span>summed_reads, <span class="dt">by=</span><span class="kw">list</span>(<span class="dt">Category=</span>amplicon_otu_rarefied_sum<span class="op">$</span>Order), <span class="dt">FUN=</span>sum)
+amplicon_order_sum =<span class="st"> </span>amplicon_order_sum[<span class="op">-</span><span class="dv">1</span>,]
+
+amplicon_family_sum =<span class="st"> </span><span class="kw">aggregate</span>(amplicon_otu_rarefied_sum<span class="op">$</span>summed_reads, <span class="dt">by=</span><span class="kw">list</span>(<span class="dt">Category=</span>amplicon_otu_rarefied_sum<span class="op">$</span>Family), <span class="dt">FUN=</span>sum)
+amplicon_family_sum =<span class="st"> </span>amplicon_family_sum[<span class="op">-</span><span class="dv">1</span>,]
+
+amplicon_genus_sum =<span class="st"> </span><span class="kw">aggregate</span>(amplicon_otu_rarefied_sum<span class="op">$</span>summed_reads, <span class="dt">by=</span><span class="kw">list</span>(<span class="dt">Category=</span>amplicon_otu_rarefied_sum<span class="op">$</span>Genus), <span class="dt">FUN=</span>sum)
+amplicon_genus_sum =<span class="st"> </span>amplicon_genus_sum[<span class="op">-</span><span class="dv">1</span>,]
+
+amplicon_species_sum =<span class="st"> </span><span class="kw">aggregate</span>(amplicon_otu_rarefied_sum<span class="op">$</span>summed_reads, <span class="dt">by=</span><span class="kw">list</span>(<span class="dt">Category=</span>amplicon_otu_rarefied_sum<span class="op">$</span>Species), <span class="dt">FUN=</span>sum)
+amplicon_species_sum =<span class="st"> </span>amplicon_species_sum[<span class="op">-</span><span class="dv">1</span>,]
+
+amplicon_normalized =<span class="st"> </span><span class="kw">c</span>(<span class="kw">sum</span>(amplicon_phylum_sum<span class="op">$</span>x)<span class="op">/</span><span class="kw">sum</span>(amplicon_otu_rarefied_sum<span class="op">$</span>summed_reads), <span class="kw">sum</span>(amplicon_class_sum<span class="op">$</span>x)<span class="op">/</span><span class="kw">sum</span>(amplicon_otu_rarefied_sum<span class="op">$</span>summed_reads), <span class="kw">sum</span>(amplicon_order_sum<span class="op">$</span>x)<span class="op">/</span><span class="kw">sum</span>(amplicon_otu_rarefied_sum<span class="op">$</span>summed_reads), <span class="kw">sum</span>(amplicon_family_sum<span class="op">$</span>x)<span class="op">/</span><span class="kw">sum</span>(amplicon_otu_rarefied_sum<span class="op">$</span>summed_reads), <span class="kw">sum</span>(amplicon_genus_sum<span class="op">$</span>x)<span class="op">/</span><span class="kw">sum</span>(amplicon_otu_rarefied_sum<span class="op">$</span>summed_reads), <span class="kw">sum</span>(amplicon_species_sum<span class="op">$</span>x)<span class="op">/</span><span class="kw">sum</span>(amplicon_otu_rarefied_sum<span class="op">$</span>summed_reads))
+
+<span class="kw">print</span>(amplicon_normalized)</code></pre></div>
+<pre><code>## [1] 0.9806314 0.9706331 0.9598099 0.9438151 0.8991307 0.7661241</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">normalized_readcount =<span class="st"> </span><span class="kw">data.frame</span>(<span class="kw">round</span>(amplicon_normalized,<span class="dv">2</span>), <span class="kw">round</span>(graftm_normalized,<span class="dv">2</span>))
+normalized_readcount =<span class="st"> </span><span class="kw">t</span>(normalized_readcount)
+normalized_readcount =<span class="st"> </span><span class="kw">as.data.frame</span>(normalized_readcount)
+<span class="kw">rownames</span>(normalized_readcount) =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Amplicon&quot;</span>, <span class="st">&quot;GraftM&quot;</span>)
+<span class="kw">colnames</span>(normalized_readcount) =<span class="st"> </span>taxonomic_levels
+<span class="kw">print</span>(normalized_readcount)</code></pre></div>
+<pre><code>##          Phylum Class Order Family Genus Species
+## Amplicon   0.98  0.97  0.96   0.94  0.90    0.77
+## GraftM     0.99  0.97  0.94   0.88  0.67    0.30</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">amp_heatmap</span>(data_ampvis, <span class="dt">group_by =</span> <span class="st">&quot;Classifier&quot;</span>, <span class="dt">tax_aggregate =</span> <span class="st">&quot;Family&quot;</span>, <span class="dt">tax_empty =</span> <span class="st">&quot;remove&quot;</span>, <span class="dt">tax_show =</span> <span class="dv">35</span>, <span class="dt">tax_add =</span> <span class="st">&quot;Phylum&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Taxonomic Level: Family&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">22</span>, <span class="dt">hjust =</span> <span class="fl">0.5</span>))</code></pre></div>
+<p><img src="2021-03-29_graftm_analysis_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">amp_heatmap</span>(data_ampvis, <span class="dt">group_by =</span> <span class="st">&quot;Classifier&quot;</span>, <span class="dt">tax_aggregate =</span> <span class="st">&quot;Class&quot;</span>, <span class="dt">tax_empty =</span> <span class="st">&quot;remove&quot;</span>, <span class="dt">tax_show =</span> <span class="dv">35</span>, <span class="dt">tax_add =</span> <span class="st">&quot;Phylum&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Taxonomic Level: Class&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">22</span>, <span class="dt">hjust =</span> <span class="fl">0.5</span>))</code></pre></div>
+<pre><code>## Warning: Transformation introduced infinite values in discrete y-axis</code></pre>
+<p><img src="2021-03-29_graftm_analysis_files/figure-html/unnamed-chunk-10-2.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">amp_heatmap</span>(data_ampvis, <span class="dt">group_by =</span> <span class="st">&quot;Classifier&quot;</span>, <span class="dt">tax_aggregate =</span> <span class="st">&quot;Genus&quot;</span>, <span class="dt">tax_empty =</span> <span class="st">&quot;remove&quot;</span>, <span class="dt">tax_show =</span> <span class="dv">35</span>, <span class="dt">tax_add =</span> <span class="st">&quot;Phylum&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Taxonomic Level: Genus&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">22</span>, <span class="dt">hjust =</span> <span class="fl">0.5</span>))</code></pre></div>
+<p><img src="2021-03-29_graftm_analysis_files/figure-html/unnamed-chunk-10-3.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">amp_heatmap</span>(data_ampvis, <span class="dt">group_by =</span> <span class="st">&quot;Classifier&quot;</span>, <span class="dt">tax_aggregate =</span> <span class="st">&quot;Species&quot;</span>, <span class="dt">tax_empty =</span> <span class="st">&quot;remove&quot;</span>, <span class="dt">tax_show =</span> <span class="dv">35</span>, <span class="dt">tax_add =</span> <span class="st">&quot;Phylum&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Taxonomic Level: Species&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">22</span>, <span class="dt">hjust =</span> <span class="fl">0.5</span>))</code></pre></div>
+<pre><code>## Warning: Transformation introduced infinite values in discrete y-axis</code></pre>
+<p><img src="2021-03-29_graftm_analysis_files/figure-html/unnamed-chunk-10-4.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">amp_octave</span>(amplicon_ampvis) </code></pre></div>
+<p><img src="2021-03-29_graftm_analysis_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">amp_octave</span>(amplicon_ampvis_rarefied)</code></pre></div>
+<p><img src="2021-03-29_graftm_analysis_files/figure-html/unnamed-chunk-11-2.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">amp_octave</span>(graftm_ampvis_rarefied)</code></pre></div>
+<p><img src="2021-03-29_graftm_analysis_files/figure-html/unnamed-chunk-11-3.png" width="672" /></p>
+</div>
+<div id="graftm-silva-vs-midas" class="section level2">
+<h2><span class="header-section-number">1.2</span> GraftM Silva vs Midas</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">amp_export_otutable</span>(graftm_silva_rarefied, <span class="st">&quot;/srv/MA/Projects/microflora_danica/analysis/projects/MFD_seges/results/WWTP_sequences/graftM/02_silva_combined_count/ampvis_otu/graftm_silva_otu_rarefied&quot;</span>)
+graftm_otu_silva_rarefied =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;/srv/MA/Projects/microflora_danica/analysis/projects/MFD_seges/results/WWTP_sequences/graftM/02_silva_combined_count/ampvis_otu/graftm_silva_otu_rarefied.csv&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>)
+
+graftm_silva_phylums =<span class="st"> </span>graftm_otu_silva_rarefied <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(Phylum) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">count</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(n))
+
+graftm_silva_class =<span class="st"> </span>graftm_otu_silva_rarefied <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(Class) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">count</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(n))
+
+graftm_silva_order =<span class="st"> </span>graftm_otu_silva_rarefied <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(Order) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">count</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(n))
+
+graftm_silva_family =<span class="st"> </span>graftm_otu_silva_rarefied <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(Family) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">count</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(n))
+
+graftm_silva_genus =<span class="st"> </span>graftm_otu_silva_rarefied <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(Genus) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">count</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(n))
+
+graftm_silva_species =<span class="st"> </span>graftm_otu_silva_rarefied <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(Species) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">count</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(n))
+
+graftm_silva_nrow =<span class="st"> </span><span class="kw">c</span>(<span class="kw">length</span>(graftm_silva_phylums<span class="op">$</span>n)<span class="op">-</span><span class="dv">1</span>, <span class="kw">length</span>(graftm_silva_class<span class="op">$</span>n)<span class="op">-</span><span class="dv">1</span>, <span class="kw">length</span>(graftm_silva_order<span class="op">$</span>n)<span class="op">-</span><span class="dv">1</span>, <span class="kw">length</span>(graftm_silva_family<span class="op">$</span>n)<span class="op">-</span><span class="dv">1</span>, <span class="kw">length</span>(graftm_silva_genus<span class="op">$</span>n)<span class="op">-</span><span class="dv">1</span>, <span class="kw">length</span>(graftm_silva_species<span class="op">$</span>n)<span class="op">-</span><span class="dv">1</span>)
+
+
+taxonomic_levels =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Phylum&quot;</span>,<span class="st">&quot;Class&quot;</span>,<span class="st">&quot;Order&quot;</span>,<span class="st">&quot;Family&quot;</span>,<span class="st">&quot;Genus&quot;</span>,<span class="st">&quot;Species&quot;</span>)
+
+graftm_silva_nrow_df =<span class="st"> </span><span class="kw">data.frame</span>(taxonomic_levels, graftm_silva_nrow)
+graftm_silva_nrow_df<span class="op">$</span>taxonomic_levels =<span class="st"> </span><span class="kw">factor</span>(graftm_nrow_df<span class="op">$</span>taxonomic_levels, <span class="dt">ordered =</span> <span class="ot">TRUE</span>, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;Phylum&quot;</span>,<span class="st">&quot;Class&quot;</span>,<span class="st">&quot;Order&quot;</span>,<span class="st">&quot;Family&quot;</span>,<span class="st">&quot;Genus&quot;</span>,<span class="st">&quot;Species&quot;</span>)) 
+  
+graftm_silva_nrow_df_new =<span class="st"> </span><span class="kw">t</span>(graftm_silva_nrow_df)
+graftm_silva_nrow_df_new =<span class="st"> </span><span class="kw">as.data.frame</span>(graftm_silva_nrow_df_new)
+<span class="kw">colnames</span>(graftm_silva_nrow_df_new) =<span class="st"> </span>taxonomic_levels
+graftm_silva_nrow_df_new =<span class="st"> </span>graftm_silva_nrow_df_new[<span class="op">-</span><span class="dv">1</span>,]
+<span class="kw">print</span>(graftm_silva_nrow_df_new)</code></pre></div>
+<pre><code>##                   Phylum Class Order Family Genus Species
+## graftm_silva_nrow     58   144   352    603  1162    1111</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">graftm_silva_otu_rarefied_sum =<span class="st"> </span>graftm_otu_silva_rarefied <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">summed_reads =</span> AalE_GraftM_Silva <span class="op">+</span><span class="st"> </span>AalW_GraftM_Silva <span class="op">+</span><span class="st"> </span>Aved_GraftM_Silva <span class="op">+</span><span class="st"> </span>Bjer_GraftM_Silva <span class="op">+</span><span class="st"> </span>Damh_GraftM_Silva <span class="op">+</span><span class="st"> </span>Ega_GraftM_Silva <span class="op">+</span><span class="st"> </span>Ejby_GraftM_Silva <span class="op">+</span><span class="st"> </span>EsbE_GraftM_Silva <span class="op">+</span><span class="st"> </span>EsbW_GraftM_Silva <span class="op">+</span><span class="st"> </span>Fred_GraftM_Silva <span class="op">+</span><span class="st"> </span>Hade_GraftM_Silva <span class="op">+</span><span class="st"> </span>Hirt_GraftM_Silva <span class="op">+</span><span class="st"> </span>Hjor_GraftM_Silva <span class="op">+</span><span class="st"> </span>Kalu_GraftM_Silva)
+
+graftm_silva_phylum_sum =<span class="st"> </span><span class="kw">aggregate</span>(graftm_silva_otu_rarefied_sum<span class="op">$</span>summed_reads, <span class="dt">by=</span><span class="kw">list</span>(<span class="dt">Category=</span>graftm_silva_otu_rarefied_sum<span class="op">$</span>Phylum), <span class="dt">FUN=</span>sum)
+graftm_silva_phylum_sum =<span class="st"> </span>graftm_silva_phylum_sum[<span class="op">-</span><span class="dv">1</span>,]
+
+graftm_silva_class_sum =<span class="st"> </span><span class="kw">aggregate</span>(graftm_silva_otu_rarefied_sum<span class="op">$</span>summed_reads, <span class="dt">by=</span><span class="kw">list</span>(<span class="dt">Category=</span>graftm_silva_otu_rarefied_sum<span class="op">$</span>Class), <span class="dt">FUN=</span>sum)
+graftm_silva_class_sum =<span class="st"> </span>graftm_silva_class_sum[<span class="op">-</span><span class="dv">1</span>,]
+
+graftm_silva_order_sum =<span class="st"> </span><span class="kw">aggregate</span>(graftm_silva_otu_rarefied_sum<span class="op">$</span>summed_reads, <span class="dt">by=</span><span class="kw">list</span>(<span class="dt">Category=</span>graftm_silva_otu_rarefied_sum<span class="op">$</span>Order), <span class="dt">FUN=</span>sum)
+graftm_silva_order_sum =<span class="st"> </span>graftm_silva_order_sum[<span class="op">-</span><span class="dv">1</span>,]
+
+graftm_silva_family_sum =<span class="st"> </span><span class="kw">aggregate</span>(graftm_silva_otu_rarefied_sum<span class="op">$</span>summed_reads, <span class="dt">by=</span><span class="kw">list</span>(<span class="dt">Category=</span>graftm_silva_otu_rarefied_sum<span class="op">$</span>Family), <span class="dt">FUN=</span>sum)
+graftm_silva_family_sum =<span class="st"> </span>graftm_silva_family_sum[<span class="op">-</span><span class="dv">1</span>,]
+
+graftm_silva_genus_sum =<span class="st"> </span><span class="kw">aggregate</span>(graftm_silva_otu_rarefied_sum<span class="op">$</span>summed_reads, <span class="dt">by=</span><span class="kw">list</span>(<span class="dt">Category=</span>graftm_silva_otu_rarefied_sum<span class="op">$</span>Genus), <span class="dt">FUN=</span>sum)
+graftm_silva_genus_sum =<span class="st"> </span>graftm_silva_genus_sum[<span class="op">-</span><span class="dv">1</span>,]
+
+graftm_silva_species_sum =<span class="st"> </span><span class="kw">aggregate</span>(graftm_silva_otu_rarefied_sum<span class="op">$</span>summed_reads, <span class="dt">by=</span><span class="kw">list</span>(<span class="dt">Category=</span>graftm_silva_otu_rarefied_sum<span class="op">$</span>Species), <span class="dt">FUN=</span>sum)
+graftm_silva_species_sum =<span class="st"> </span>graftm_silva_species_sum[<span class="op">-</span><span class="dv">1</span>,]
+
+graftm_silva_normalized =<span class="st"> </span><span class="kw">c</span>(<span class="kw">sum</span>(graftm_silva_phylum_sum<span class="op">$</span>x)<span class="op">/</span><span class="kw">sum</span>(graftm_silva_otu_rarefied_sum<span class="op">$</span>summed_reads), <span class="kw">sum</span>(graftm_silva_class_sum<span class="op">$</span>x)<span class="op">/</span><span class="kw">sum</span>(graftm_silva_otu_rarefied_sum<span class="op">$</span>summed_reads), <span class="kw">sum</span>(graftm_silva_order_sum<span class="op">$</span>x)<span class="op">/</span><span class="kw">sum</span>(graftm_silva_otu_rarefied_sum<span class="op">$</span>summed_reads), <span class="kw">sum</span>(graftm_silva_family_sum<span class="op">$</span>x)<span class="op">/</span><span class="kw">sum</span>(graftm_silva_otu_rarefied_sum<span class="op">$</span>summed_reads), <span class="kw">sum</span>(graftm_silva_genus_sum<span class="op">$</span>x)<span class="op">/</span><span class="kw">sum</span>(graftm_silva_otu_rarefied_sum<span class="op">$</span>summed_reads), <span class="kw">sum</span>(graftm_silva_species_sum<span class="op">$</span>x)<span class="op">/</span><span class="kw">sum</span>(graftm_silva_otu_rarefied_sum<span class="op">$</span>summed_reads))
+<span class="kw">print</span>(graftm_silva_normalized)</code></pre></div>
+<pre><code>## [1] 0.9842378 0.9725245 0.9266743 0.8056288 0.5091069 0.1844409</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">amp_heatmap</span>(graftm_comp_ampvis_rarefied, <span class="dt">group_by =</span> <span class="st">&quot;Database&quot;</span>, <span class="dt">tax_aggregate =</span> <span class="st">&quot;Family&quot;</span>, <span class="dt">tax_empty =</span> <span class="st">&quot;remove&quot;</span>, <span class="dt">tax_show =</span> <span class="dv">35</span>, <span class="dt">tax_add =</span> <span class="st">&quot;Phylum&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Taxonomic Level: Family&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">22</span>, <span class="dt">hjust =</span> <span class="fl">0.5</span>))</code></pre></div>
+<pre><code>## Warning: Transformation introduced infinite values in discrete y-axis</code></pre>
+<p><img src="2021-03-29_graftm_analysis_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">amp_heatmap</span>(graftm_comp_ampvis_rarefied, <span class="dt">group_by =</span> <span class="st">&quot;Database&quot;</span>, <span class="dt">tax_aggregate =</span> <span class="st">&quot;Class&quot;</span>, <span class="dt">tax_empty =</span> <span class="st">&quot;remove&quot;</span>, <span class="dt">tax_show =</span> <span class="dv">35</span>, <span class="dt">tax_add =</span> <span class="st">&quot;Phylum&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Taxonomic Level: Class&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">22</span>, <span class="dt">hjust =</span> <span class="fl">0.5</span>))</code></pre></div>
+<pre><code>## Warning: Transformation introduced infinite values in discrete y-axis</code></pre>
+<p><img src="2021-03-29_graftm_analysis_files/figure-html/unnamed-chunk-13-2.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">amp_heatmap</span>(graftm_comp_ampvis_rarefied, <span class="dt">group_by =</span> <span class="st">&quot;Database&quot;</span>, <span class="dt">tax_aggregate =</span> <span class="st">&quot;Genus&quot;</span>, <span class="dt">tax_empty =</span> <span class="st">&quot;remove&quot;</span>, <span class="dt">tax_show =</span> <span class="dv">35</span>, <span class="dt">tax_add =</span> <span class="st">&quot;Phylum&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Taxonomic Level: Genus&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">22</span>, <span class="dt">hjust =</span> <span class="fl">0.5</span>))</code></pre></div>
+<pre><code>## Warning: Transformation introduced infinite values in discrete y-axis</code></pre>
+<p><img src="2021-03-29_graftm_analysis_files/figure-html/unnamed-chunk-13-3.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">amp_heatmap</span>(graftm_comp_ampvis_rarefied, <span class="dt">group_by =</span> <span class="st">&quot;Database&quot;</span>, <span class="dt">tax_aggregate =</span> <span class="st">&quot;Species&quot;</span>, <span class="dt">tax_empty =</span> <span class="st">&quot;remove&quot;</span>, <span class="dt">tax_show =</span> <span class="dv">35</span>, <span class="dt">tax_add =</span> <span class="st">&quot;Phylum&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Taxonomic Level: Species&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">22</span>, <span class="dt">hjust =</span> <span class="fl">0.5</span>))</code></pre></div>
+<pre><code>## Warning: Transformation introduced infinite values in discrete y-axis</code></pre>
+<p><img src="2021-03-29_graftm_analysis_files/figure-html/unnamed-chunk-13-4.png" width="672" /></p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+<a href="intro.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["2021-03-29_graftm_analysis.pdf", "2021-03-29_graftm_analysis.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,5 @@
+book_filename: "2021-03-29_graftm_analysis"
+delete_merged_file: true
+language:
+  ui:
+    chapter_name: "Chapter "
